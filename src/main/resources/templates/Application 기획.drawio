@@ -1,0 +1,127 @@
+<mxfile host="Electron" modified="2024-05-13T08:31:04.738Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="evXnC2JSK1GjW9D1HGCp" version="24.2.5" type="device">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="2477" dy="1708" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-0" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Actor&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-1654" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-1" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;External System&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#76608a;fontColor=#ffffff;strokeColor=#432D57;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-1474" y="240" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-2" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Command&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-1654" y="240" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-3" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Policy&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#bac8d3;strokeColor=#23445d;fontColor=#000000;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-1474" y="120" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-4" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Event&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-1654" y="120" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-5" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Hostspot&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-1294" y="190" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-6" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;aggregate&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-1654" y="360" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-7" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;data&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#b0e3e6;strokeColor=#0e8088;fontColor=#000000;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-1654" y="480" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-8" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Administor&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-440" y="380" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-9" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;User&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-440" y="230" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-11" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;유저 회원 가입됨&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-620" y="620" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-12" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;유저 및 관리자 로그인 됨&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-220" y="620" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-13" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;로그아웃됨&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="560" y="680" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-15" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;관리자 프로필 입력됨&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="180" y="770" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-16" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;유저 프로필 입력됨&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="180" y="620" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-17" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TODO 리스트 작성됨&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="620" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-18" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TODO 리스트 삭제됨&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1890" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-19" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TODO 리스트 수정됨&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1680" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-20" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TODO 리스트 전체 조회됨&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1421" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-21" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TODO 리스트 조회됨&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1020" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-22" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;타 유저는 삭제 불가&lt;/h1&gt;&lt;div&gt;관리자 및 작성 유저만 삭제 가능&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#bac8d3;strokeColor=#23445d;fontColor=#000000;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1850" y="-150" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-23" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;타 유저는 수정 불가&lt;/h1&gt;&lt;div&gt;관리자 및 작성 유저만 수정 가능&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#bac8d3;strokeColor=#23445d;fontColor=#000000;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1640" y="-150" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-24" value="관리자 기준 모든 유저의 리스트를 전체 조회 할 것인지&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;관리자 기준 본인 것만 조회 하게끔 구현할 것인지&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;align=left;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1250" y="-300" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-25" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;각자 유저에 맞는 리스트 조회 및 생성&lt;/h1&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;작성 유저가 open으로 풀었을 경우 TODO 리스트 전체 조회가 가능하게끔 설정&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#bac8d3;strokeColor=#23445d;fontColor=#000000;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="440" y="-160" width="1160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-26" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TODO 코맨트 작성됨&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="830" y="420" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-27" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TODO 코맨트 삭제됨&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1670" y="420" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-28" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TODO 코맨트 수정됨&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1460" y="420" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-29" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TODO 리스트 코맨트 전체 조회됨&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1040" y="420" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-30" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TODO 리스트 삭제 시 코맨트 삭제&lt;/h1&gt;&lt;div&gt;관리자 및 작성 유저만 삭제 가능&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#bac8d3;strokeColor=#23445d;fontColor=#000000;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1670" y="270" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-31" value="추가적으로 특정 권한을 부여받은 유저가 수정을 가능하게 할 것 인지&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;-&amp;gt; 권한 관련 공부를 좀 더 하고 고민 예정&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#e51400;fontColor=#ffffff;strokeColor=#B20000;align=left;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1460" y="-300" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-32" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;유저 및 관리자 로그인&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-400" y="620" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-33" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;유저 프로필 입력&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry y="620" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-34" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;유저 및 관리자 로그아웃&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="380" y="680" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-35" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;관리자 프로필 입력 (유저 + 유저의 관리자 권한 여부)&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry y="770" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-37" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;유저 회원 가입&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-800" y="620" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-38" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TODO 리스트 조회&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="840" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-46" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TODO 리스트 금일 날짜 기준 전체 조회&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1241" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-48" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TODO 리스트 작성&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="440" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-49" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TODO 리스트 전체 조회&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1241" y="120" width="180" height="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
