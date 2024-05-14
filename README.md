@@ -2,7 +2,7 @@
 
 ## 목차
 1. [전체 적인 앱 구상도
-](#1-전체-적인-앱-구상도)
+](#1-앱-구상도)
 
 2. [ERD](#2-erd)
 
@@ -13,19 +13,22 @@
 5. [기타 버그 및 수정 사항](#5-기타-버그-및-수정-사항)
 
 
-### 1. 전체 적인 앱 구상도
-
+### 1. 앱 구상도
 ![앱 기획 다이어그램](/src/main/resources/templates/image/Application 기획.svg)
 
-**전체 적으로 크게 2개의 aggregate 로 분류를 하였습니다** 
+<details>
+<summary style="font-size: 18px; font-weight: bold"> 1. 전체 적인 앱 기능</summary>
+<div markdown="1">     
 
-- ##### TODO List Aggregate
+**전체 적으로 크게 2개의 aggregate 로 분류를 하였습니다**
+
+#### TODO List Aggregate
 
 - TODO List Aggregate 는 큰 시각 에서 봤을 때 유저의 할일을 CRUD 로 받아 주는 기능이 있습니다
 
 - 크게 2가지의 기능 으로 나뉘며 메인 으로 할 일들을 받아주고 처리 해주는 TODO 기능과 해당 기능에 코맨트를 달 수 있는 코맨트 기능이 있습니다
 
-- ###### TODO
+##### TODO
 
 - TODO 는 전체 적인 할 일을 CRUD 해주는 기능 입니다
 
@@ -35,19 +38,22 @@
 
 - 전체 정보 조회는 금일 날짜만 조회하는 기능과 전체 할일 리스트를 조회하는 기능을 추가할 예정 입니다
 
-- ###### Comment
+##### Comment
 
 - Comment 는 user의 댓글을 CRUD 해주는 기능 입니다
 
 - 댓글의 수정은 user 만 할 수 있습니다, 관리자는 댓글을 수정 하지 못하고 바로 삭제만 가능 합니다
 
-- ##### User Aggregate
+##### User Aggregate
 
 - User는 사용자의 이메일과 비밀번호를 로그인 하여 프로필을 수정 후에 유저가 로그아웃 하는 작업을 진행 합니다
 
 - 추가로 관리자는 프로필을 수정할 시에 일반 유저의 정보를 수정할 수 있으며 (비밀번호 제외) 유저 에게 관리자 권한을 부여할 수 도 있다
 
 - 관리자는 일반 유저의 정보를 삭제할 수 있다
+</div>
+</details>
+
 
 ### 2. ERD
 
@@ -169,5 +175,5 @@ Todo{
 
 - Spring.ver : 1.9.23
 
-- jpa.ver : 1.9.23
+- JPA.ver : 1.9.23
 
