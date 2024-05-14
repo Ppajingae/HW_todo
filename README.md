@@ -98,9 +98,9 @@ Todo{
 
     String title
 
-    TodoType type
+    Enum type
 
-    Importance importance
+    Enum importance
 
     String content
 
