@@ -1,28 +1,35 @@
 package com.example.mytodo.domain.user.controller
 
 import com.example.mytodo.domain.user.dto.*
+import com.example.mytodo.domain.user.service.UserService
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 
 @RestController
 @RequestMapping("/")
-class UserController {
+class UserController(
+    val userService: UserService
+) {
 
     @PostMapping("/signUp")
-    fun signUp(@RequestBody membershipRequestDto: MembershipRequestDto): UserResponseDto {
-        TODO()
+    fun signUp(@RequestBody membershipRequestDto: MembershipRequestDto): ResponseEntity<UserResponseDto> {
+       return ResponseEntity.status(HttpStatus.CREATED).body(userService.signUp(membershipRequestDto))
     }
 
     @PostMapping("/login")
-    fun login(@RequestBody loginRequestDto: LoginRequestDto): UserResponseDto {
-        TODO()
+    fun login(@RequestBody loginRequestDto: LoginRequestDto): ResponseEntity<UserResponseDto> {
+
+        return ResponseEntity.status(HttpStatus.OK).body(userService.login(loginRequestDto))
     }
 
     @PutMapping("/{user_id}/profile")
     fun updateUserProfile(
         @PathVariable("user_id") userId: Long,
-        @RequestBody membershipUpdateRequestDto: MembershipUpdateRequestDto): UserResponseDto {
-        TODO()
+        @RequestBody membershipUpdateRequestDto: MembershipUpdateRequestDto): ResponseEntity<UserResponseDto> {
+
+        return ResponseEntity.status(HttpStatus.OK).body(userService.updateUserProfile(userId, membershipUpdateRequestDto))
     }
 
     @PutMapping("/{correction_id}/{user_id}/profile")
@@ -30,8 +37,9 @@ class UserController {
         @PathVariable("correction_id") correctionId: Long,
         @PathVariable("user_id") userId: Long,
         @RequestBody membershipUpdateAdminRequestDto: MembershipUpdateAdminRequestDto
-    ): UserResponseDto {
-        TODO()
+    ): ResponseEntity<UserResponseDto> {
+
+        return ResponseEntity.status(HttpStatus.OK).body(userService.updateAdminUserProfile(correctionId, userId, membershipUpdateAdminRequestDto))
     }
 
     @PostMapping("/logout")
@@ -43,7 +51,14 @@ class UserController {
     fun deleteAdminUserProfile(
         @PathVariable("correction_id") correctionId: Long,
         @PathVariable("user_id") userId: Long,
-    ){
-        TODO()
+    ): ResponseEntity<UserResponseDto> {
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+    }
+
+    @GetMapping("/{correction_id}/profile/all")
+    fun getAdminUserProfileList(@PathVariable("correction_id") correctionId: Long): ResponseEntity<List<UserResponseDto>> {
+
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getAdminUserProfileList(correctionId))
     }
 }
