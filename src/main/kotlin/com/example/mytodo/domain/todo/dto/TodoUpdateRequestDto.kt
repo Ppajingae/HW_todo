@@ -1,6 +1,6 @@
 package com.example.mytodo.domain.todo.dto
 
-import com.example.mytodo.common.DateTime
+import com.example.mytodo.domain.common.DateTime
 import org.apache.logging.log4j.util.StringMap
 import java.time.LocalDateTime
 

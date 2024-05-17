@@ -4,6 +4,7 @@ import com.example.mytodo.domain.todo.dto.TodoCreateRequestDto
 import com.example.mytodo.domain.todo.dto.TodoResponseDto
 import com.example.mytodo.domain.todo.dto.TodoUpdateRequestDto
 import com.example.mytodo.domain.todo.service.TodoService
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -48,7 +49,5 @@ class TodoController(
     fun deleteTodoById(@PathVariable("todo_id") todoId: Long):ResponseEntity<Unit>  {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(todoService.deleteTodo(todoId))
     }
-
-
 
 }
