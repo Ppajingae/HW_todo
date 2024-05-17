@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/")
 class UserController(
-    val userService: UserService
+    private val userService: UserService
 ) {
 
     @PostMapping("/signUp")

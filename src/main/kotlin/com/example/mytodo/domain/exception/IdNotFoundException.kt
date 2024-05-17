@@ -1,4 +1,4 @@
-package com.example.mytodo.exception
+package com.example.mytodo.domain.exception
 
 
 data class IdNotFoundException(

@@ -3,16 +3,21 @@ package com.example.mytodo.domain.todo.service
 import com.example.mytodo.domain.comment.dto.CommentCreateRequestDto
 import com.example.mytodo.domain.comment.dto.CommentResponseDto
 import com.example.mytodo.domain.comment.dto.CommentUpdateRequestDto
+import com.example.mytodo.domain.comment.entity.Comment
+import com.example.mytodo.domain.comment.entity.toResponse
 import com.example.mytodo.domain.comment.repository.CommentRepository
-import com.example.mytodo.domain.todo.dto.*
+import com.example.mytodo.domain.exception.IdNotFoundException
+import com.example.mytodo.domain.todo.dto.TodoCreateRequestDto
+import com.example.mytodo.domain.todo.dto.TodoResponseDto
+import com.example.mytodo.domain.todo.dto.TodoUpdateRequestDto
 import com.example.mytodo.domain.todo.entity.Todo
 import com.example.mytodo.domain.todo.entity.toResponse
 import com.example.mytodo.domain.todo.repository.TodoRepository
-import com.example.mytodo.exception.IdNotFoundException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
+
 
 @Service
 class TodoServiceImpl(
@@ -22,7 +27,6 @@ class TodoServiceImpl(
 
     override fun getTodo(todoId: Long): TodoResponseDto {
         val result = todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
-
         return result.toResponse()
     }
 
@@ -33,7 +37,6 @@ class TodoServiceImpl(
 
 
     override fun getTodayTodoList(): List<TodoResponseDto> {
-
         return todoRepository.getTodayTodoList().map { it.toResponse() }
     }
 
@@ -66,30 +69,51 @@ class TodoServiceImpl(
         result.endTime = endTime
 
         return todoRepository.save(result).toResponse()
+
     }
 
     @Transactional
     override fun deleteTodo(todoId: Long) {
-        val result = todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
-        todoRepository.delete(result)
+        todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
+        todoRepository.deleteById(todoId)
     }
 
     @Transactional
     override fun createComment(todoId: Long, commentCreateRequestDto: CommentCreateRequestDto): CommentResponseDto {
-        TODO("Not yet implemented")
+        val todoResult = todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
+        return commentRepository.save(
+           Comment(
+               comment = commentCreateRequestDto.comment,
+               todo = todoResult,
+               user = todoResult.user
+           )
+        ).toResponse()
     }
 
     override fun getAllComments(todoId: Long): List<CommentResponseDto> {
-        TODO("Not yet implemented")
+        val result = todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
+
+        return result.comment.map { it.toResponse() }
     }
 
     @Transactional
     override fun updateComment(todoId: Long, commentId: Long, commentUpdateRequestDto: CommentUpdateRequestDto): CommentResponseDto {
-        TODO("Not yet implemented")
+        todoRepository.findByIdOrNull(todoId)?: throw IdNotFoundException("Todo with ID $todoId not found")
+        val commentResult = commentRepository.findByIdOrNull(commentId) ?: throw IdNotFoundException("Not Comment")
+        val (comment) = commentUpdateRequestDto
+
+        commentResult.comment = comment
+
+        return commentResult.toResponse()
+
+
     }
 
     @Transactional
     override fun deleteComment(todoId: Long, commentId: Long) {
-        TODO("Not yet implemented")
+        todoRepository.findByIdOrNull(todoId)?: throw IdNotFoundException("Todo with ID $todoId not found")
+        commentRepository.findByIdOrNull(commentId)?: throw IdNotFoundException("Not Comment")
+
+        commentRepository.deleteById(commentId)
     }
 }

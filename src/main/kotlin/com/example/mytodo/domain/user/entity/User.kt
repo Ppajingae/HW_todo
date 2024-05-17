@@ -3,6 +3,7 @@ package com.example.mytodo.domain.user.entity
 import com.example.mytodo.domain.comment.entity.Comment
 import com.example.mytodo.domain.todo.entity.Todo
 import com.example.mytodo.domain.user.dto.Admin
+import com.example.mytodo.domain.user.dto.UserResponseDto
 import jakarta.persistence.*
 
 @Entity
@@ -26,14 +27,14 @@ class User(
         cascade = [(CascadeType.ALL)],
         fetch = FetchType.LAZY,
         orphanRemoval = true,
-        mappedBy = "app_user")
+        mappedBy = "user")
     val todo : MutableList<Todo> = mutableListOf(),
 
     @OneToMany(
         cascade = [(CascadeType.ALL)],
         fetch = FetchType.LAZY,
         orphanRemoval = true,
-        mappedBy = "app_user")
+        mappedBy = "user")
     val comment: MutableList<Comment> = mutableListOf(),
 
 
@@ -43,4 +44,16 @@ class User(
     var id: Long? = null
 
 
+
 }
+
+fun User.toResponse():UserResponseDto{
+    return UserResponseDto(
+        id = id!!,
+        email = email,
+        nickname = nickname,
+        isAdmin = Admin.NORMAL_MEMBER,
+    )
+}
+
+

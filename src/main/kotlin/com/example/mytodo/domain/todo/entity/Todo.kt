@@ -1,6 +1,6 @@
 package com.example.mytodo.domain.todo.entity
 
-import com.example.mytodo.common.DateTime
+import com.example.mytodo.domain.common.DateTime
 import com.example.mytodo.domain.comment.entity.Comment
 import com.example.mytodo.domain.todo.dto.Importance
 import com.example.mytodo.domain.todo.dto.TodoResponseDto
@@ -8,6 +8,7 @@ import com.example.mytodo.domain.todo.dto.TodoType
 import com.example.mytodo.domain.user.entity.User
 import jakarta.persistence.*
 import java.time.LocalDateTime
+
 
 @Entity
 @Table(name = "todo")
@@ -61,7 +62,8 @@ fun Todo.toResponse(): TodoResponseDto {
         content = content,
         startTime = startTime,
         endTime = endTime,
-        createAt = getCreatedTime(),
-        updateAt = getUpdatedTime(),
+        createAt = getCreateAt(),
+        updateAt = getUpdateAt(),
+        comment = comment
     )
 }
