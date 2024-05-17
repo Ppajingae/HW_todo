@@ -14,7 +14,7 @@
 
 
 ### 1. 앱 구상도
-![앱 기획 다이어그램](/src/main/resources/templates/image/Application 기획.svg)
+![앱 기획 다이어그램](https://github.com/Ppajingae/HW_todo/blob/dev/src/main/resources/templates/image/Application%20%EA%B8%B0%ED%9A%8D.svg)
 
 <details>
 <summary style="font-size: 18px; font-weight: bold"> 1. 전체 적인 앱 기능</summary>
@@ -75,6 +75,7 @@ User{
     TEXT nickname
 
     TEXT is_admin
+
 }
 
 Comment{
