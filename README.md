@@ -158,7 +158,7 @@ DateTime <|-- Comment
 DateTime <|-- Todo
 
 class DateTime{
-    <<abstract class>>
+    <<abstractClass>>
     LocalDateTime createAt 
     LocalDateTime updateAt 
 
