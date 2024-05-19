@@ -16,8 +16,8 @@ class TodoController(
     private val todoService: TodoService
 ) {
 
-    @GetMapping("/{todo_id}")
-    fun getTodoById(@PathVariable("todo_id") todoId: Long):ResponseEntity<TodoResponseDto> {
+    @GetMapping("/{todoId}")
+    fun getTodoById(@PathVariable todoId: Long):ResponseEntity<TodoResponseDto> {
         return ResponseEntity.status(HttpStatus.OK).body(todoService.getTodo(todoId))
     }
 
@@ -38,15 +38,15 @@ class TodoController(
         return ResponseEntity.status(HttpStatus.CREATED).body(todoService.createTodo(todoCreateRequestDto))
     }
 
-    @PutMapping("/{todo_id}")
+    @PutMapping("/{todoId}")
     fun updateTodoById(
-        @PathVariable("todo_id") todoId: Long,
+        @PathVariable todoId: Long,
         @RequestBody todoUpdateRequestDto: TodoUpdateRequestDto):ResponseEntity<TodoResponseDto>  {
         return ResponseEntity.status(HttpStatus.OK).body(todoService.updateTodo(todoId, todoUpdateRequestDto))
     }
 
-    @DeleteMapping("/{todo_id}")
-    fun deleteTodoById(@PathVariable("todo_id") todoId: Long):ResponseEntity<Unit>  {
+    @DeleteMapping("/{todoId}")
+    fun deleteTodoById(@PathVariable todoId: Long):ResponseEntity<Unit>  {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(todoService.deleteTodo(todoId))
     }
 

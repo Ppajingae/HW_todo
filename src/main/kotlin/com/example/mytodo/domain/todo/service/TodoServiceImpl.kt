@@ -13,6 +13,7 @@ import com.example.mytodo.domain.todo.dto.TodoUpdateRequestDto
 import com.example.mytodo.domain.todo.entity.Todo
 import com.example.mytodo.domain.todo.entity.toResponse
 import com.example.mytodo.domain.todo.repository.TodoRepository
+import com.example.mytodo.domain.user.repository.UserRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -23,6 +24,7 @@ import java.time.LocalDateTime
 class TodoServiceImpl(
     private val todoRepository: TodoRepository,
     private val commentRepository: CommentRepository,
+    private val userRepository: UserRepository,
 ): TodoService {
 
     override fun getTodo(todoId: Long): TodoResponseDto {
@@ -42,16 +44,18 @@ class TodoServiceImpl(
 
     @Transactional
     override fun createTodo(todoCreateRequestDto: TodoCreateRequestDto): TodoResponseDto {
+        val user = userRepository.findByIdOrNull(todoCreateRequestDto.userId)?: throw IdNotFoundException("User with ID ${todoCreateRequestDto.userId}")
+
 
         return todoRepository.save(
             Todo(
                 title = todoCreateRequestDto.title,
                 type =  todoCreateRequestDto.todoType,
                 importance = todoCreateRequestDto.importance,
-                content = todoCreateRequestDto.content,
                 startTime = todoCreateRequestDto.startTime ?: LocalDateTime.now(),
                 endTime = todoCreateRequestDto.endTime,
-                user = todoCreateRequestDto.userId
+                content = todoCreateRequestDto.content,
+                user = user
             )
         ).toResponse()
     }
