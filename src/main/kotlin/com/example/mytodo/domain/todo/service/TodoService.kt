@@ -23,14 +23,4 @@ interface TodoService {
 
     fun deleteTodo(todoId: Long)
 
-//-------------------------------------------------------------------------------------------------------
-
-    fun createComment(todoId: Long, commentCreateRequestDto: CommentCreateRequestDto): CommentResponseDto
-
-    fun getAllComments(todoId: Long): List<CommentResponseDto>
-
-    fun updateComment(todoId: Long, commentId: Long, commentUpdateRequestDto: CommentUpdateRequestDto): CommentResponseDto
-
-    fun deleteComment(todoId: Long, commentId: Long)
-
 }
