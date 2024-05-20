@@ -1,10 +1,26 @@
 spring:
   application:
     name: mytodo
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        highlight_sql: true
+        use_sql_comments: true
 
 
 server:
   port: 7070
 
 
+
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        orm:
+          jdbc:
+            bind: trace
 

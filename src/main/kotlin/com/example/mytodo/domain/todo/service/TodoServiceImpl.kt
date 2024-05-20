@@ -115,9 +115,8 @@ class TodoServiceImpl(
 
     @Transactional
     override fun deleteComment(todoId: Long, commentId: Long) {
-        todoRepository.findByIdOrNull(todoId)?: throw IdNotFoundException("Todo with ID $todoId not found")
-        commentRepository.findByIdOrNull(commentId)?: throw IdNotFoundException("Not Comment")
-
+        todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
+        commentRepository.findByIdOrNull(commentId) ?: throw IdNotFoundException("Not Comment")
         commentRepository.deleteById(commentId)
     }
 }

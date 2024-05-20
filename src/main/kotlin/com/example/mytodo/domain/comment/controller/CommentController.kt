@@ -43,6 +43,6 @@ class CommentController(
         @PathVariable todoId: Long,
         @PathVariable commentId: Long,
         ):ResponseEntity<Unit>{
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(todoService.deleteComment(todoId, commentId))
     }
 }
