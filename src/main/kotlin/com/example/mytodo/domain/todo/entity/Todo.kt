@@ -7,6 +7,7 @@ import com.example.mytodo.domain.todo.dto.TodoResponseDto
 import com.example.mytodo.domain.todo.dto.TodoType
 import com.example.mytodo.domain.user.entity.User
 import jakarta.persistence.*
+import org.hibernate.annotations.ColumnDefault
 import java.time.LocalDateTime
 
 
@@ -43,13 +44,19 @@ class Todo(
         cascade = [CascadeType.ALL],
         orphanRemoval = true,
         mappedBy = "todo")
-    var comment: MutableList<Comment> = mutableListOf()
+    var comment: MutableList<Comment> = mutableListOf(),
+
+    @ColumnDefault(value = "false")
+    @Column(name="is_complete", nullable = false)
+    var isComplete: Boolean = false
 
 ):DateTime(){
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
+
+    fun checkComplete() = isComplete
 
 }
 
@@ -64,6 +71,7 @@ fun Todo.toResponse(): TodoResponseDto {
         endTime = endTime,
         createAt = getCreateAt(),
         updateAt = getUpdateAt(),
-        comment = comment
+        comment = comment,
+        isComplete = isComplete
     )
 }

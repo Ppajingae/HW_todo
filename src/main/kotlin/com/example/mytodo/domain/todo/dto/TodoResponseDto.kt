@@ -17,6 +17,8 @@ data class TodoResponseDto(
 
     var content: String?,
 
+    var isComplete: Boolean,
+
     var comment: MutableList<Comment>,
 
     var startTime: LocalDateTime?,

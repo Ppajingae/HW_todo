@@ -1,12 +1,8 @@
 package com.example.mytodo.domain.todo.service
 
-import com.example.mytodo.domain.comment.dto.CommentCreateRequestDto
-import com.example.mytodo.domain.comment.dto.CommentResponseDto
-import com.example.mytodo.domain.comment.dto.CommentUpdateRequestDto
-import com.example.mytodo.domain.comment.entity.Comment
-import com.example.mytodo.domain.comment.entity.toResponse
 import com.example.mytodo.domain.comment.repository.CommentRepository
 import com.example.mytodo.domain.exception.IdNotFoundException
+import com.example.mytodo.domain.exception.NotCompleteException
 import com.example.mytodo.domain.todo.dto.TodoCreateRequestDto
 import com.example.mytodo.domain.todo.dto.TodoResponseDto
 import com.example.mytodo.domain.todo.dto.TodoUpdateRequestDto
@@ -63,12 +59,13 @@ class TodoServiceImpl(
     @Transactional
     override fun updateTodo(todoId: Long, todoUpdateRequestDto: TodoUpdateRequestDto): TodoResponseDto {
         val result = todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
-        val (title, todoType, importance, content, startTime, endTime) = todoUpdateRequestDto
+        val (title, todoType, importance, content, isComplete, startTime, endTime) = todoUpdateRequestDto
 
         result.title = title
         result.type = todoType
         result.importance = importance
         result.content = content
+        result.isComplete = isComplete
         result.startTime = startTime ?: LocalDateTime.now()
         result.endTime = endTime
 
@@ -78,7 +75,10 @@ class TodoServiceImpl(
 
     @Transactional
     override fun deleteTodo(todoId: Long) {
-        todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
+        val result = todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
+
+        if(!result.checkComplete()) throw NotCompleteException("완료 상태로 전환 후에 다시 시도해주세요")
+
         todoRepository.deleteById(todoId)
     }
 
