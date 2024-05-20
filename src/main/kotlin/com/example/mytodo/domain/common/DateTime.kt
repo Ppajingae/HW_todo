@@ -3,9 +3,10 @@ package com.example.mytodo.domain.common
 import jakarta.persistence.MappedSuperclass
 import jakarta.persistence.PrePersist
 import jakarta.persistence.PreUpdate
+import org.springframework.context.annotation.Configuration
 import java.time.LocalDateTime
 
-
+@Configuration
 @MappedSuperclass
 abstract class DateTime {
 
