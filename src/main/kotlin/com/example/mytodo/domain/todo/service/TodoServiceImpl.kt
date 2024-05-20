@@ -1,12 +1,13 @@
 package com.example.mytodo.domain.todo.service
 
-import com.example.mytodo.domain.comment.repository.CommentRepository
 import com.example.mytodo.domain.exception.IdNotFoundException
 import com.example.mytodo.domain.exception.NotCompleteException
 import com.example.mytodo.domain.todo.dto.TodoCreateRequestDto
+import com.example.mytodo.domain.todo.dto.TodoListResponseDto
 import com.example.mytodo.domain.todo.dto.TodoResponseDto
 import com.example.mytodo.domain.todo.dto.TodoUpdateRequestDto
 import com.example.mytodo.domain.todo.entity.Todo
+import com.example.mytodo.domain.todo.entity.toListResponse
 import com.example.mytodo.domain.todo.entity.toResponse
 import com.example.mytodo.domain.todo.repository.TodoRepository
 import com.example.mytodo.domain.user.repository.UserRepository
@@ -19,7 +20,6 @@ import java.time.LocalDateTime
 @Service
 class TodoServiceImpl(
     private val todoRepository: TodoRepository,
-    private val commentRepository: CommentRepository,
     private val userRepository: UserRepository,
 ): TodoService {
 
@@ -28,14 +28,14 @@ class TodoServiceImpl(
         return result.toResponse()
     }
 
-    override fun getTodoList(): List<TodoResponseDto> {
+    override fun getTodoList(): List<TodoListResponseDto> {
 
-        return todoRepository.findAll().map { it.toResponse() }
+        return todoRepository.findAll().map { it.toListResponse() }
     }
 
 
-    override fun getTodayTodoList(): List<TodoResponseDto> {
-        return todoRepository.getTodayTodoList().map { it.toResponse() }
+    override fun getTodayTodoList(): List<TodoListResponseDto> {
+        return todoRepository.getTodayTodoList().map { it.toListResponse() }
     }
 
     @Transactional
@@ -77,7 +77,7 @@ class TodoServiceImpl(
     override fun deleteTodo(todoId: Long) {
         val result = todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
 
-        if(!result.checkComplete()) throw NotCompleteException("완료 상태로 전환 후에 다시 시도해주세요")
+        if(!result.checkComplete()) throw NotCompleteException("완료 상태로 전환 후에 다시 시도 해주세요")
 
         todoRepository.deleteById(todoId)
     }

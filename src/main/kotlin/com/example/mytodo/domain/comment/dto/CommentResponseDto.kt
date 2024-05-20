@@ -7,4 +7,6 @@ data class CommentResponseDto(
 
     var comment: String,
 
+    var nickname : String,
+
     )

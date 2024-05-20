@@ -43,6 +43,9 @@ class User(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
+    fun validPassword(inputPassword: String):Boolean{
+        return password == inputPassword
+    }
 
 
 }

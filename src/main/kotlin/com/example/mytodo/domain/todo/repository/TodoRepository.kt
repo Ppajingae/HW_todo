@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository
 @Repository
 interface TodoRepository: JpaRepository<Todo, Long> {
 
-    @Query("SELECT p FROM Todo p WHERE p.endTime = CURRENT_DATE")
+    @Query("SELECT p FROM Todo p WHERE p.endTime = CURRENT_DATE ORDER BY p.isComplete ASC")
     fun getTodayTodoList(): List<Todo>
 
 

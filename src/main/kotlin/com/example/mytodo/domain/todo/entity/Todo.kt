@@ -3,6 +3,7 @@ package com.example.mytodo.domain.todo.entity
 import com.example.mytodo.domain.common.DateTime
 import com.example.mytodo.domain.comment.entity.Comment
 import com.example.mytodo.domain.todo.dto.Importance
+import com.example.mytodo.domain.todo.dto.TodoListResponseDto
 import com.example.mytodo.domain.todo.dto.TodoResponseDto
 import com.example.mytodo.domain.todo.dto.TodoType
 import com.example.mytodo.domain.user.entity.User
@@ -73,5 +74,20 @@ fun Todo.toResponse(): TodoResponseDto {
         updateAt = getUpdateAt(),
         comment = comment,
         isComplete = isComplete
+    )
+}
+
+fun Todo.toListResponse():TodoListResponseDto{
+    return TodoListResponseDto(
+        id = id!!,
+        title= title,
+        todoType = type,
+        importance = importance,
+        content = content,
+        startTime = startTime,
+        endTime = endTime,
+        createAt = getCreateAt(),
+        updateAt = getUpdateAt(),
+        isComplete = isComplete,
     )
 }
