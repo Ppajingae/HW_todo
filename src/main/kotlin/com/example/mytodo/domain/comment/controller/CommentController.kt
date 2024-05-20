@@ -1,9 +1,11 @@
 package com.example.mytodo.domain.comment.controller
 
 import com.example.mytodo.domain.comment.dto.CommentCreateRequestDto
+import com.example.mytodo.domain.comment.dto.CommentDeleteRequestDto
 import com.example.mytodo.domain.comment.dto.CommentResponseDto
 import com.example.mytodo.domain.comment.dto.CommentUpdateRequestDto
 import com.example.mytodo.domain.comment.service.CommentService
+import com.example.mytodo.domain.common.DeleteResponseDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -42,8 +44,9 @@ class CommentController(
     fun deleteComment(
         @PathVariable todoId: Long,
         @PathVariable commentId: Long,
-        ):ResponseEntity<Unit>{
-        commentService.deleteComment(todoId, commentId)
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+        @RequestBody commentDeleteRequestDto: CommentDeleteRequestDto,
+        ):ResponseEntity<DeleteResponseDto>{
+
+        return ResponseEntity.status(HttpStatus.OK).body(commentService.deleteComment(todoId, commentId, commentDeleteRequestDto))
     }
 }

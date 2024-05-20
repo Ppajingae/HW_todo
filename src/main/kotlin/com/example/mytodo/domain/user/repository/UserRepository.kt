@@ -11,4 +11,5 @@ interface UserRepository: JpaRepository<User, Long> {
 //    @Query("SELECT u.isAdmin FROM User u WHERE u.id = :id")
 //    fun findByIdAndIsAdmin(@Param("id")correctionId: Long):UserResponseDto
 
+    fun findByEmail(email: String): User
 }

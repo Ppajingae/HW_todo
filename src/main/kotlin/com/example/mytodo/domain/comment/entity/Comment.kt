@@ -40,5 +40,6 @@ fun Comment.toResponse():CommentResponseDto{
     return CommentResponseDto(
         id = id!!,
         comment = comment,
+        nickname = user.nickname
     )
 }

@@ -18,4 +18,9 @@ class GlobalExceptionHandler {
     fun noAuthorityException(e: Exception): ResponseEntity<ErrorResponseDto> {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ErrorResponseDto("Error message: ${e.message}"))
     }
+
+    @ExceptionHandler(NotCompleteException::class)
+    fun notCompleteException(e: Exception): ResponseEntity<ErrorResponseDto>{
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ErrorResponseDto("${e.message}"))
+    }
 }

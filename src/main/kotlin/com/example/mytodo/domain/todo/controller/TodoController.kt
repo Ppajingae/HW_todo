@@ -1,6 +1,7 @@
 package com.example.mytodo.domain.todo.controller
 
 import com.example.mytodo.domain.todo.dto.TodoCreateRequestDto
+import com.example.mytodo.domain.todo.dto.TodoListResponseDto
 import com.example.mytodo.domain.todo.dto.TodoResponseDto
 import com.example.mytodo.domain.todo.dto.TodoUpdateRequestDto
 import com.example.mytodo.domain.todo.service.TodoService
@@ -22,12 +23,12 @@ class TodoController(
     }
 
     @GetMapping
-    fun getTodoList(): ResponseEntity<List<TodoResponseDto>> {
+    fun getTodoList(): ResponseEntity<List<TodoListResponseDto>> {
         return ResponseEntity.status(HttpStatus.OK).body(todoService.getTodoList())
     }
 
     @GetMapping("/day")
-    fun getTodayToDoList(): ResponseEntity<List<TodoResponseDto>> {
+    fun getTodayToDoList(): ResponseEntity<List<TodoListResponseDto>> {
         return ResponseEntity.status(HttpStatus.OK).body(todoService.getTodayTodoList())
     }
 

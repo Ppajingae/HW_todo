@@ -1,5 +1,5 @@
 package com.example.mytodo.domain.exception
 
-data class NoAuthorityException(
+data class NotCompleteException(
     val msg: String
 ):RuntimeException(msg)

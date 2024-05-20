@@ -447,7 +447,7 @@ class CommentController {
   - 결론
     - 처음에는 Bean 주입 문제로 확인 하고 해결을 시도 하였으나 확인해보니 환경변수의 Port 번호가 누락된 시점 에서 `application.yml`의 변경을 시도 하면서 빌드 과정에서 꼬인 것으로 확인 하였습니다
 #### AS-IS
-- 환경 변수
+
   ```
     SPRING_DATASOURCE_URL=jdbc:postgresql://aws-0-ap-northeast-2.pooler.supabase.com/postgres?user=postgres.jisckkofuptsqjyfhklh&password=PASSWORD
   
@@ -466,9 +466,24 @@ class CommentController {
   ```
 - `application.yml` 파일에 위 문구를 삭제 하였습니다
 
-#### 5-3 Delete 삭제가 안되는 애러 발생 <- Todo, Comment 전체 확인됨
+#### 5-3 POST 요청 시에 HttpMessageNotReadableException 애러 발생
+
+- 애러 내용
+```
+JSON parse error: Illegal unquoted character ((CTRL-CHAR, code 8)): has to be escaped using backslash to be included in string value]
+```
+- 원인
+  - 문자열 앞에 공백 등이 있을 경우에 JSON이 Parse 되지 않는 현상
+
+- 해결
+  - 확인 중
+
+#### AS-IS
+
+#### 5-4 Delete 삭제가 안되는 애러 발생 <- Todo, Comment 전체 확인됨
 
 - 현재 확인중입니다
+
 
 ### 6. 환경 설정
 
