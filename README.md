@@ -447,7 +447,7 @@ class CommentController {
 #### AS-IS
 - 환경 변수
   ```
-    SPRING_DATASOURCE_URL=jdbc:postgresql://aws-0-ap-northeast-2.pooler.supabase.com/postgres?user=postgres.jisckkofuptsqjyfhklh&password=5ANIrcN8JhcdTWhz
+    SPRING_DATASOURCE_URL=jdbc:postgresql://aws-0-ap-northeast-2.pooler.supabase.com/postgres?user=postgres.jisckkofuptsqjyfhklh&password=PASSWORD
   
   ```
 - `application.yml`
@@ -459,7 +459,7 @@ class CommentController {
 #### TO-BE
 - 환경 변수
   ```
-    SPRING_DATASOURCE_URL=jdbc:postgresql://aws-0-ap-northeast-2.pooler.supabase.com:5432/postgres?user=postgres.jisckkofuptsqjyfhklh&password=5ANIrcN8JhcdTWhz
+    SPRING_DATASOURCE_URL=jdbc:postgresql://aws-0-ap-northeast-2.pooler.supabase.com:5432/postgres?user=postgres.jisckkofuptsqjyfhklh&password=PASSWORD
   
   ```
 - `application.yml` 파일에 위 문구를 삭제 하였습니다
