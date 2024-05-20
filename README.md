@@ -1,5 +1,7 @@
 # TODO 앱 기본 구성
 
+# 참고 : User 부분은 완전 미완성 상태입니다 그리고 현재 DELETE 기능 버그로 작동을 안하고 있습니다 이 부분도 빠르게 해결해보겠습니다
+
 ## 목차
 1. [전체 적인 앱 구상도
 ](#1-앱-구상도)
@@ -475,8 +477,12 @@ JSON parse error: Illegal unquoted character ((CTRL-CHAR, code 8)): has to be es
 
 - 해결
   - 확인 중
+
 #### AS-IS
 
+#### 5-4 Delete 삭제가 안되는 애러 발생 <- Todo, Comment 전체 확인됨
+
+- 현재 확인중입니다
 
 
 ### 6. 환경 설정
