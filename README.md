@@ -475,8 +475,12 @@ JSON parse error: Illegal unquoted character ((CTRL-CHAR, code 8)): has to be es
 
 - 해결
   - 확인 중
+
 #### AS-IS
 
+#### 5-4 Delete 삭제가 안되는 애러 발생 <- Todo, Comment 전체 확인됨
+
+- 현재 확인중입니다
 
 
 ### 6. 환경 설정
