@@ -2,15 +2,13 @@ package com.example.mytodo.domain.todo.service
 
 import com.example.mytodo.domain.exception.IdNotFoundException
 import com.example.mytodo.domain.exception.NotCompleteException
-import com.example.mytodo.domain.todo.dto.TodoCreateRequestDto
-import com.example.mytodo.domain.todo.dto.TodoListResponseDto
-import com.example.mytodo.domain.todo.dto.TodoResponseDto
-import com.example.mytodo.domain.todo.dto.TodoUpdateRequestDto
+import com.example.mytodo.domain.todo.dto.*
 import com.example.mytodo.domain.todo.entity.Todo
 import com.example.mytodo.domain.todo.entity.toListResponse
 import com.example.mytodo.domain.todo.entity.toResponse
 import com.example.mytodo.domain.todo.repository.TodoRepository
 import com.example.mytodo.domain.user.repository.UserRepository
+import org.springframework.data.domain.Sort
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -37,6 +35,23 @@ class TodoServiceImpl(
     override fun getTodayTodoList(): List<TodoListResponseDto> {
         return todoRepository.getTodayTodoList().map { it.toListResponse() }
     }
+
+    @Transactional
+    override fun getTodoListSorted(sortRequestDto: SortRequestDto): List<TodoListResponseDto> {
+
+         val sort = Sort.by(if(sortRequestDto.sortBy) Sort.Direction.ASC else Sort.Direction.DESC, sortRequestDto.columnName)
+
+        return todoRepository.findAllBy(sort).map { it.toListResponse() }
+    }
+
+    override fun getUserTodoList(userId: Long): List<TodoListResponseDto> {
+        userRepository.findByIdOrNull(userId)?: throw IdNotFoundException("존재하지 않는 유저 입니다")
+
+        return todoRepository.findByUserId(userId).map { it.toListResponse() }
+    }
+
+
+
 
     @Transactional
     override fun createTodo(todoCreateRequestDto: TodoCreateRequestDto): TodoResponseDto {
@@ -72,6 +87,8 @@ class TodoServiceImpl(
         return todoRepository.save(result).toResponse()
 
     }
+
+
 
     @Transactional
     override fun deleteTodo(todoId: Long) {

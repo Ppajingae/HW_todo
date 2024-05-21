@@ -1,9 +1,6 @@
 package com.example.mytodo.domain.todo.controller
 
-import com.example.mytodo.domain.todo.dto.TodoCreateRequestDto
-import com.example.mytodo.domain.todo.dto.TodoListResponseDto
-import com.example.mytodo.domain.todo.dto.TodoResponseDto
-import com.example.mytodo.domain.todo.dto.TodoUpdateRequestDto
+import com.example.mytodo.domain.todo.dto.*
 import com.example.mytodo.domain.todo.service.TodoService
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
 import org.springframework.http.HttpStatus
@@ -22,7 +19,7 @@ class TodoController(
         return ResponseEntity.status(HttpStatus.OK).body(todoService.getTodo(todoId))
     }
 
-    @GetMapping
+    @GetMapping("/admin")
     fun getTodoList(): ResponseEntity<List<TodoListResponseDto>> {
         return ResponseEntity.status(HttpStatus.OK).body(todoService.getTodoList())
     }
@@ -31,6 +28,24 @@ class TodoController(
     fun getTodayToDoList(): ResponseEntity<List<TodoListResponseDto>> {
         return ResponseEntity.status(HttpStatus.OK).body(todoService.getTodayTodoList())
     }
+
+    @PostMapping("/sort")
+    fun getTodoListSorted(
+        @RequestBody sortRequestDto: SortRequestDto
+    ): ResponseEntity<List<TodoListResponseDto>> {
+
+        return ResponseEntity.status(HttpStatus.OK).body(todoService.getTodoListSorted(sortRequestDto))
+    }
+
+    @GetMapping("/test/{userId}")
+    fun getUserTodoList(@PathVariable userId: Long): ResponseEntity<List<TodoListResponseDto>> {
+
+        return ResponseEntity.status(HttpStatus.OK).body(todoService.getUserTodoList(userId))
+    }
+
+
+
+
 
     @PostMapping
     fun createTodo(

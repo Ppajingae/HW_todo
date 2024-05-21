@@ -1,5 +1,9 @@
-package com.example.mytodo.domain.exception
+package com.example.mytodo.domain.exception.handler
 
+import com.example.mytodo.domain.exception.IdNotFoundException
+import com.example.mytodo.domain.exception.ModelNotFoundException
+import com.example.mytodo.domain.exception.NoAuthorityException
+import com.example.mytodo.domain.exception.NotCompleteException
 import com.example.mytodo.domain.exception.dto.ErrorResponseDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -16,11 +20,16 @@ class GlobalExceptionHandler {
 
     @ExceptionHandler(NoAuthorityException::class)
     fun noAuthorityException(e: Exception): ResponseEntity<ErrorResponseDto> {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ErrorResponseDto("Error message: ${e.message}"))
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ErrorResponseDto("not Authority: ${e.message}"))
     }
 
     @ExceptionHandler(NotCompleteException::class)
     fun notCompleteException(e: Exception): ResponseEntity<ErrorResponseDto>{
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ErrorResponseDto("${e.message}"))
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ErrorResponseDto("this todo is not complete : ${e.message}"))
+    }
+
+    @ExceptionHandler(ModelNotFoundException::class)
+    fun modelNotFoundException(e: Exception): ResponseEntity<ErrorResponseDto>{
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponseDto("Model Not Found: ${e.message}"))
     }
 }
