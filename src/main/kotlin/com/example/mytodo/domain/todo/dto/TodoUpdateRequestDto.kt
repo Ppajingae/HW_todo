@@ -1,6 +1,7 @@
 package com.example.mytodo.domain.todo.dto
 
 
+import jakarta.validation.Valid
 import java.time.LocalDateTime
 
 data class TodoUpdateRequestDto(
@@ -13,7 +14,7 @@ data class TodoUpdateRequestDto(
 
     var content: String?,
 
-    var isComplete: Boolean,
+    var complete: Boolean,
 
     var startTime: LocalDateTime?,
 

@@ -1,9 +1,6 @@
 package com.example.mytodo.domain.exception.handler
 
-import com.example.mytodo.domain.exception.IdNotFoundException
-import com.example.mytodo.domain.exception.ModelNotFoundException
-import com.example.mytodo.domain.exception.NoAuthorityException
-import com.example.mytodo.domain.exception.NotCompleteException
+import com.example.mytodo.domain.exception.*
 import com.example.mytodo.domain.exception.dto.ErrorResponseDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -31,5 +28,10 @@ class GlobalExceptionHandler {
     @ExceptionHandler(ModelNotFoundException::class)
     fun modelNotFoundException(e: Exception): ResponseEntity<ErrorResponseDto>{
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponseDto("Model Not Found: ${e.message}"))
+    }
+
+    @ExceptionHandler(StringLengthException::class)
+    fun stringLengthException(e: Exception): ResponseEntity<ErrorResponseDto>{
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponseDto("Length of Error: ${e.message}"))
     }
 }

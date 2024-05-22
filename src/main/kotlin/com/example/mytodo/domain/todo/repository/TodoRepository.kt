@@ -10,7 +10,7 @@ import org.springframework.data.domain.Sort
 @Repository
 interface TodoRepository: JpaRepository<Todo, Long> {
 
-    @Query("SELECT p FROM Todo p WHERE p.endTime = CURRENT_DATE ORDER BY p.isComplete ASC")
+    @Query("SELECT p FROM Todo p WHERE p.endTime = CURRENT_DATE ORDER BY p.complete ASC")
     fun getTodayTodoList(): List<Todo>
 
     fun findAllBy(sort: Sort): List<Todo>

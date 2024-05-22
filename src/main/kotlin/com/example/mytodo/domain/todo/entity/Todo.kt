@@ -1,11 +1,8 @@
 package com.example.mytodo.domain.todo.entity
 
-import com.example.mytodo.domain.common.DateTime
 import com.example.mytodo.domain.comment.entity.Comment
-import com.example.mytodo.domain.todo.dto.Importance
-import com.example.mytodo.domain.todo.dto.TodoListResponseDto
-import com.example.mytodo.domain.todo.dto.TodoResponseDto
-import com.example.mytodo.domain.todo.dto.TodoType
+import com.example.mytodo.domain.common.DateTime
+import com.example.mytodo.domain.todo.dto.*
 import com.example.mytodo.domain.user.entity.User
 import jakarta.persistence.*
 import org.hibernate.annotations.ColumnDefault
@@ -49,7 +46,7 @@ class Todo(
 
     @ColumnDefault(value = "false")
     @Column(name="is_complete", nullable = false)
-    var isComplete: Boolean = false
+    var complete: Boolean = false
 
 ):DateTime(){
 
@@ -57,7 +54,17 @@ class Todo(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
-    fun checkComplete() = isComplete
+    fun checkComplete() = complete
+
+    fun update(todoUpdateRequestDto: TodoUpdateRequestDto) {
+        title = todoUpdateRequestDto.title
+        type = todoUpdateRequestDto.todoType
+        importance = todoUpdateRequestDto.importance
+        content = todoUpdateRequestDto.content
+        startTime = todoUpdateRequestDto.startTime ?: LocalDateTime.now()
+        endTime = todoUpdateRequestDto.endTime
+    }
+
 
 }
 
@@ -73,7 +80,7 @@ fun Todo.toResponse(): TodoResponseDto {
         createAt = getCreateAt(),
         updateAt = getUpdateAt(),
         comment = comment,
-        isComplete = isComplete
+        complete = complete,
     )
 }
 
@@ -88,6 +95,6 @@ fun Todo.toListResponse():TodoListResponseDto{
         endTime = endTime,
         createAt = getCreateAt(),
         updateAt = getUpdateAt(),
-        isComplete = isComplete,
+        complete = complete
     )
 }

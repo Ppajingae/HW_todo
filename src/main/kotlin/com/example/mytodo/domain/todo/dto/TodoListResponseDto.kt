@@ -14,7 +14,7 @@ data class TodoListResponseDto(
 
     var content: String?,
 
-    var isComplete: Boolean,
+    var complete: Boolean,
 
     var startTime: LocalDateTime?,
 

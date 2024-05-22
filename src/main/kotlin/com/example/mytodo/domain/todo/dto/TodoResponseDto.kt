@@ -17,7 +17,7 @@ data class TodoResponseDto(
 
     var content: String?,
 
-    var isComplete: Boolean,
+    var complete: Boolean,
 
     var comment: MutableList<Comment>,
 

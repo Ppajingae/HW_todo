@@ -478,9 +478,13 @@ JSON parse error: Illegal unquoted character ((CTRL-CHAR, code 8)): has to be es
 
 #### AS-IS
 
-#### 5-4 Delete 삭제가 안되는 애러 발생 <- Todo, Comment 전체 확인됨
+### 5-4 complete 변수 swagger 에서 적용이 되지 않는 문제
 
-- 현재 확인중입니다
+- 애러 내용
+
+  - isComplete 라는 변수 선언 시 swagger 에서 complete, isComplete까지 같이 생성 되는 문제
+
+  - 위 문제 해결 이후에 변수에 값을 입력할 시 제대로 변경 되지 않는 문제
 
 
 ### 6. 환경 설정

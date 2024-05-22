@@ -1,11 +1,12 @@
 package com.example.mytodo.domain.user.service
 
+import com.example.mytodo.domain.exception.IdNotFoundException
+import com.example.mytodo.domain.exception.NoAuthorityException
 import com.example.mytodo.domain.user.dto.*
 import com.example.mytodo.domain.user.entity.User
 import com.example.mytodo.domain.user.entity.toResponse
 import com.example.mytodo.domain.user.repository.UserRepository
-import com.example.mytodo.domain.exception.NoAuthorityException
-import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -76,4 +77,19 @@ class UserServiceImpl(
 
         TODO("Not yet implemented")
     }
+
+    fun searchUserById(userId: Long):User {
+       return userRepository.findByIdOrNull(userId) ?: throw IdNotFoundException("아이디가 존재 하지 않습니다")
+    }
+
+    fun searchUserByEmail(email: String, password: String):User{
+
+        val result = userRepository.findByEmail(email)
+
+        if(!result.validPassword(password)) throw NoAuthorityException("비밀번호가 틀렸습니다")
+
+        return userRepository.findByEmail(email)
+    }
+
+
 }

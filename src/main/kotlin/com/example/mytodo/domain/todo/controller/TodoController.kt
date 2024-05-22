@@ -1,10 +1,12 @@
 package com.example.mytodo.domain.todo.controller
 
+import com.example.mytodo.domain.exception.StringLengthException
 import com.example.mytodo.domain.todo.dto.*
 import com.example.mytodo.domain.todo.service.TodoService
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 
 
@@ -44,13 +46,16 @@ class TodoController(
     }
 
 
-
-
-
     @PostMapping
     fun createTodo(
-        @RequestBody todoCreateRequestDto: TodoCreateRequestDto)
-    :ResponseEntity<TodoResponseDto>  {
+        @Valid @RequestBody todoCreateRequestDto: TodoCreateRequestDto,
+        bindingResult: BindingResult
+    ):ResponseEntity<TodoResponseDto>  {
+        if(bindingResult.hasErrors()){
+
+           throw StringLengthException(bindingResult.fieldError?.defaultMessage.toString())
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(todoService.createTodo(todoCreateRequestDto))
     }
 

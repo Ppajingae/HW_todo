@@ -9,9 +9,8 @@ import com.example.mytodo.domain.comment.entity.toResponse
 import com.example.mytodo.domain.comment.repository.CommentRepository
 import com.example.mytodo.domain.common.DeleteResponseDto
 import com.example.mytodo.domain.exception.IdNotFoundException
-import com.example.mytodo.domain.exception.NoAuthorityException
 import com.example.mytodo.domain.todo.repository.TodoRepository
-import com.example.mytodo.domain.user.repository.UserRepository
+import com.example.mytodo.domain.user.service.UserServiceImpl
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -20,15 +19,13 @@ import org.springframework.transaction.annotation.Transactional
 class CommentServiceImpl(
     private val commentRepository: CommentRepository,
     private val todoRepository: TodoRepository,
-    private val userRepository: UserRepository,
+    private val userService: UserServiceImpl,
 ):CommentService {
 
     @Transactional
     override fun createComment(todoId: Long, commentCreateRequestDto: CommentCreateRequestDto): CommentResponseDto {
         val todoResult = todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
-        val userResult = userRepository.findByEmail(commentCreateRequestDto.email)
-
-        if(!userResult.validPassword(commentCreateRequestDto.password)) throw NoAuthorityException("비밀번호가 틀렸습니다")
+        userService.searchUserByEmail(commentCreateRequestDto.email, commentCreateRequestDto.password)
 
         return commentRepository.save(
             Comment(
@@ -49,9 +46,8 @@ class CommentServiceImpl(
     override fun updateComment(todoId: Long, commentId: Long, commentUpdateRequestDto: CommentUpdateRequestDto): CommentResponseDto {
         todoRepository.findByIdOrNull(todoId)?: throw IdNotFoundException("Todo with ID $todoId not found")
         val commentResult = commentRepository.findByIdOrNull(commentId) ?: throw IdNotFoundException("Not Comment")
-        val userResult = userRepository.findByEmail(commentUpdateRequestDto.email)
+        userService.searchUserByEmail(commentUpdateRequestDto.email, commentUpdateRequestDto.password)
 
-        if(!userResult.validPassword(commentUpdateRequestDto.password)) throw NoAuthorityException("비밀번호가 틀렸습니다")
 
 
         val comment = commentUpdateRequestDto.comment
@@ -67,10 +63,7 @@ class CommentServiceImpl(
     override fun deleteComment(todoId: Long, commentId: Long, commentDeleteRequestDto: CommentDeleteRequestDto):DeleteResponseDto {
         todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
         commentRepository.findByIdOrNull(commentId) ?: throw IdNotFoundException("Not Comment")
-        val userResult = userRepository.findByEmail(commentDeleteRequestDto.email)
-
-        if(!userResult.validPassword(commentDeleteRequestDto.password)) throw NoAuthorityException("비밀번호가 틀렸습니다")
-
+        userService.searchUserByEmail(commentDeleteRequestDto.email, commentDeleteRequestDto.password)
 
         commentRepository.deleteById(commentId)
 
