@@ -9,6 +9,7 @@ import com.example.mytodo.domain.comment.entity.toResponse
 import com.example.mytodo.domain.comment.repository.CommentRepository
 import com.example.mytodo.domain.common.DeleteResponseDto
 import com.example.mytodo.domain.common.exception.IdNotFoundException
+import com.example.mytodo.domain.session.service.SessionService
 import com.example.mytodo.domain.todo.repository.TodoRepository
 import com.example.mytodo.domain.user.service.CommonUserService
 import org.springframework.data.repository.findByIdOrNull
@@ -19,13 +20,13 @@ import org.springframework.transaction.annotation.Transactional
 class CommentServiceImpl(
     private val commentRepository: CommentRepository,
     private val todoRepository: TodoRepository,
-    private val userService: CommonUserService,
+    private val sessionService: SessionService,
 ):CommentService {
 
     @Transactional
     override fun createComment(todoId: Long, commentCreateRequestDto: CommentCreateRequestDto): CommentResponseDto {
+        sessionService.getSession(commentCreateRequestDto.userId)
         val todoResult = todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
-        userService.searchUserByEmail(commentCreateRequestDto.email, commentCreateRequestDto.password)
 
         return commentRepository.save(
             Comment(
@@ -44,10 +45,9 @@ class CommentServiceImpl(
 
     @Transactional
     override fun updateComment(todoId: Long, commentId: Long, commentUpdateRequestDto: CommentUpdateRequestDto): CommentResponseDto {
+        sessionService.getSession(commentUpdateRequestDto.userId)
         todoRepository.findByIdOrNull(todoId)?: throw IdNotFoundException("Todo with ID $todoId not found")
         val commentResult = commentRepository.findByIdOrNull(commentId) ?: throw IdNotFoundException("Not Comment")
-        userService.searchUserByEmail(commentUpdateRequestDto.email, commentUpdateRequestDto.password)
-
 
 
         val comment = commentUpdateRequestDto.comment
@@ -61,9 +61,9 @@ class CommentServiceImpl(
 
     @Transactional
     override fun deleteComment(todoId: Long, commentId: Long, commentDeleteRequestDto: CommentDeleteRequestDto):DeleteResponseDto {
+        sessionService.getSession(commentDeleteRequestDto.userId)
         todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
         commentRepository.findByIdOrNull(commentId) ?: throw IdNotFoundException("Not Comment")
-        userService.searchUserByEmail(commentDeleteRequestDto.email, commentDeleteRequestDto.password)
 
         commentRepository.deleteById(commentId)
 

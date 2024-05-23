@@ -18,7 +18,7 @@ class SessionService(
 ) {
 
     fun getSession(userId: Long){
-        val result = sessionRepository.findByUserId(userId)?: throw NoAuthorityException("해당 이메일은 존재하지 않습니다")
+        val result = sessionRepository.findByUserId(userId)?: throw NoAuthorityException("로그인을 해주세요")
         if(result.checkTimeOut()) {
             sessionRepository.deleteById(userId)
             throw TimeOutException("세션 만료")
@@ -51,7 +51,7 @@ class SessionService(
     }
 
     fun deleteSession(){
-
+        TODO()
     }
 
     fun deleteSessionByUserId(userId: Long){

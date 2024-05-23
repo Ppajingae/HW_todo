@@ -7,7 +7,7 @@ interface TodoService {
 
     fun getTodo(todoId: Long): TodoResponseDto
 
-    fun getTodoList(): List<TodoListResponseDto>
+    fun getTodoList(correctionId: Long): List<TodoListResponseDto>
 
     fun getTodayTodoList(): List<TodoListResponseDto>
 

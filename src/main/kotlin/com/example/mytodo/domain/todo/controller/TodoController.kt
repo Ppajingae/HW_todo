@@ -21,9 +21,11 @@ class TodoController(
         return ResponseEntity.status(HttpStatus.OK).body(todoService.getTodo(todoId))
     }
 
-    @GetMapping("/admin")
-    fun getTodoList(): ResponseEntity<List<TodoListResponseDto>> {
-        return ResponseEntity.status(HttpStatus.OK).body(todoService.getTodoList())
+    @GetMapping("/admin/{correctionId}")
+    fun getTodoList(
+        @PathVariable correctionId: Long,
+    ): ResponseEntity<List<TodoListResponseDto>> {
+        return ResponseEntity.status(HttpStatus.OK).body(todoService.getTodoList(correctionId))
     }
 
     @GetMapping("/day")

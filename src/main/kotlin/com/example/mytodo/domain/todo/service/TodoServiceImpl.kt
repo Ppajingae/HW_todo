@@ -2,6 +2,7 @@ package com.example.mytodo.domain.todo.service
 
 import com.example.mytodo.domain.common.exception.IdNotFoundException
 import com.example.mytodo.domain.common.exception.NotCompleteException
+import com.example.mytodo.domain.session.service.SessionService
 import com.example.mytodo.domain.todo.dto.*
 import com.example.mytodo.domain.todo.entity.Todo
 import com.example.mytodo.domain.todo.entity.toListResponse
@@ -18,6 +19,7 @@ import java.time.LocalDateTime
 @Service
 class TodoServiceImpl(
     private val todoRepository: TodoRepository,
+    private val sessionService: SessionService,
     private val userService: CommonUserService,
 ): TodoService {
 
@@ -27,7 +29,8 @@ class TodoServiceImpl(
         return result.toResponse()
     }
 
-    override fun getTodoList(): List<TodoListResponseDto> {
+    override fun getTodoList(correctionId: Long): List<TodoListResponseDto> {
+        sessionService.getAdminSession(correctionId)
 
         return todoRepository.findAll().map { it.toListResponse() }
     }
@@ -39,14 +42,13 @@ class TodoServiceImpl(
 
     @Transactional
     override fun getTodoListSorted(sortRequestDto: SortRequestDto): List<TodoListResponseDto> {
-
-         val sort = Sort.by(if(sortRequestDto.sortBy) Sort.Direction.ASC else Sort.Direction.DESC, sortRequestDto.columnName)
+        val sort = Sort.by(if(sortRequestDto.sortBy) Sort.Direction.ASC else Sort.Direction.DESC, sortRequestDto.columnName)
 
         return todoRepository.findAllBy(sort).map { it.toListResponse() }
     }
 
     override fun getUserTodoList(userId: Long): List<TodoListResponseDto> {
-        userService.searchUserById(userId)
+        sessionService.getSession(userId)
 
         return todoRepository.findByUserId(userId).map { it.toListResponse() }
     }
@@ -56,7 +58,7 @@ class TodoServiceImpl(
 
     @Transactional
     override fun createTodo(todoCreateRequestDto: TodoCreateRequestDto): TodoResponseDto {
-        val user = userService.searchUserById(todoCreateRequestDto.userId)
+        sessionService.getSession(todoCreateRequestDto.userId)
 
         return todoRepository.save(
             Todo(
@@ -66,7 +68,7 @@ class TodoServiceImpl(
                 startTime = todoCreateRequestDto.startTime ?: LocalDateTime.now(),
                 endTime = todoCreateRequestDto.endTime,
                 content = todoCreateRequestDto.content,
-                user = user
+                user = userService.searchUserById(todoCreateRequestDto.userId)
             )
         ).toResponse()
     }

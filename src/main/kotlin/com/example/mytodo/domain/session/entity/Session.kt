@@ -15,6 +15,7 @@ class Session(
     @Column(name = "email")
     val email : String,
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "is_admin")
     val isAdmin: Admin,
 
@@ -30,5 +31,9 @@ class Session(
 
     fun checkAdmin():Boolean = isAdmin.name == Admin.ADMIN.name
 
-    fun checkTimeOut():Boolean = updateAt < LocalDateTime.now()
+    fun checkTimeOut():Boolean{
+        println(updateAt)
+        println(LocalDateTime.now())
+        return updateAt < LocalDateTime.now()
+    }
 }
