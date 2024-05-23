@@ -1,11 +1,14 @@
-<mxfile host="Electron" modified="2024-05-20T05:30:47.392Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="THXpGFHnbcaXtqAtyKMU" version="24.4.0" type="device">
+<mxfile host="Electron" modified="2024-05-23T08:17:34.396Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.4.0 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="-q1F6ooHzAPFAGXIpcYI" version="24.4.0" type="device">
   <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
-    <mxGraphModel dx="3623" dy="3405" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="3248" dy="3082" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
         <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="IrmACfk9YA6cMG1wpujl-39" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeWidth=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="-1300" y="1090" width="3140" height="1590" as="geometry" />
+        </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-41" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeWidth=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="-490" y="-1710" width="3140" height="1340" as="geometry" />
+          <mxGeometry x="-490" y="-1710" width="3140" height="1470" as="geometry" />
         </mxCell>
         <mxCell id="HAmuDQvCKLbOcNuJEESd-0" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Actor&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-1654" width="180" height="120" as="geometry" />
@@ -32,7 +35,7 @@
           <mxGeometry x="-1654" y="480" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="HAmuDQvCKLbOcNuJEESd-8" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Administor&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1130" y="1740" width="180" height="120" as="geometry" />
+          <mxGeometry x="1131" y="1980" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="HAmuDQvCKLbOcNuJEESd-9" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;User&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="229.5" y="-920" width="180" height="120" as="geometry" />
@@ -47,7 +50,7 @@
           <mxGeometry x="910" y="1440" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="HAmuDQvCKLbOcNuJEESd-15" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;관리자 프로필 입력됨&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="330" y="1590" width="180" height="120" as="geometry" />
+          <mxGeometry x="330" y="1710" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="HAmuDQvCKLbOcNuJEESd-16" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;유저 프로필 입력됨&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="330" y="1440" width="180" height="120" as="geometry" />
@@ -100,14 +103,14 @@
         <mxCell id="HAmuDQvCKLbOcNuJEESd-32" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;유저 및 관리자 로그인&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-430" y="1440" width="180" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="HAmuDQvCKLbOcNuJEESd-33" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;유저 프로필 입력&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="150" y="1440" width="180" height="120" as="geometry" />
+        <mxCell id="HAmuDQvCKLbOcNuJEESd-33" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;해당 유저가 맞는지 확인&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="150" y="1380" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="HAmuDQvCKLbOcNuJEESd-34" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;유저 및 관리자 로그아웃&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="730" y="1440" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="HAmuDQvCKLbOcNuJEESd-35" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;관리자 프로필 입력 (유저 + 유저의 관리자 권한 여부)&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="150" y="1590" width="180" height="120" as="geometry" />
+          <mxGeometry x="150" y="1780" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="HAmuDQvCKLbOcNuJEESd-37" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;유저 회원 가입&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-1010" y="1440" width="180" height="120" as="geometry" />
@@ -137,22 +140,22 @@
           <mxGeometry x="2120" y="-800" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-4" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;관리자 유저 프로필 조회함&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="330" y="1740" width="180" height="120" as="geometry" />
+          <mxGeometry x="330" y="1980" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-5" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;관리자 유저 프로필 조회&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="150" y="1740" width="180" height="120" as="geometry" />
+          <mxGeometry x="150" y="1930" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-6" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;관리자 유저 프로필 수정&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="910" y="1740" width="180" height="120" as="geometry" />
+          <mxGeometry x="910" y="1980" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-7" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;관리자 유저 프로필 수정&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="730" y="1740" width="180" height="120" as="geometry" />
+          <mxGeometry x="730" y="1930" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-8" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;관리자 유저 프로필 삭제&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#fa6800;fontColor=#000000;strokeColor=#C73500;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1491" y="1740" width="180" height="120" as="geometry" />
+          <mxGeometry x="1491" y="1980" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-9" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;관리자 유저 프로필 삭제&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="1311" y="1740" width="180" height="120" as="geometry" />
+          <mxGeometry x="1311" y="1930" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-10" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TODO 코맨트 작성&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-159" y="325" width="180" height="120" as="geometry" />
@@ -167,7 +170,7 @@
           <mxGeometry x="2121" y="325" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-14" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Administor&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="550" y="1740" width="180" height="120" as="geometry" />
+          <mxGeometry x="550" y="1980" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-15" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;User&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-340" y="-920" width="180" height="120" as="geometry" />
@@ -179,13 +182,13 @@
           <mxGeometry x="550" y="1380" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-18" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Administor&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="-30" y="1740" width="180" height="120" as="geometry" />
+          <mxGeometry x="-30" y="1980" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-19" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;User&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-30" y="1440" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-20" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Administor&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="-30" y="1590" width="180" height="120" as="geometry" />
+          <mxGeometry x="-30" y="1710" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-21" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;User&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-610" y="1380" width="180" height="120" as="geometry" />
@@ -241,14 +244,11 @@
         <mxCell id="IrmACfk9YA6cMG1wpujl-38" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Administor&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#e3c800;fontColor=#000000;strokeColor=#B09500;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="1940" y="385" width="180" height="120" as="geometry" />
         </mxCell>
-        <mxCell id="IrmACfk9YA6cMG1wpujl-39" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeWidth=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="-1300" y="1090" width="3140" height="1110" as="geometry" />
-        </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-40" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;User&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="160" y="1030" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-42" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;TodoList&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="981" y="-1430" width="180" height="120" as="geometry" />
+          <mxGeometry x="1234.75" y="-1780" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="IrmACfk9YA6cMG1wpujl-43" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeWidth=5;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-530" y="-70" width="3140" height="890" as="geometry" />
@@ -274,14 +274,47 @@
         <mxCell id="IrmACfk9YA6cMG1wpujl-52" value="&lt;h1 style=&quot;margin-top: 0px; font-size: 24px;&quot;&gt;id : Long&lt;/h1&gt;&lt;h1 style=&quot;margin-top: 0px; font-size: 24px;&quot;&gt;user : User&lt;/h1&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;comment : String&lt;/div&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;createAt : LocalDateTime&lt;/div&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;updateAt :&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;LocalDateTime&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;todo : Todo&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 24px;&quot;&gt;&lt;br style=&quot;font-size: 24px;&quot;&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#b0e3e6;strokeColor=#0e8088;fontColor=#000000;fontStyle=1;fontSize=24;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="500" y="-250" width="510" height="360" as="geometry" />
         </mxCell>
-        <mxCell id="IrmACfk9YA6cMG1wpujl-53" value="&lt;h1 style=&quot;margin-top: 0px; font-size: 16px;&quot;&gt;id : Long&lt;/h1&gt;&lt;h1 style=&quot;margin-top: 0px; font-size: 16px;&quot;&gt;user : User&lt;/h1&gt;&lt;div&gt;title : String&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;type : Enum&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;br style=&quot;font-size: 16px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;importance : Enum&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;content : String&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;isComplete : Boolean&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;startTime :&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;LocalDateTime&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;endTime : LocalDateTime&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;br style=&quot;font-size: 16px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;createAt : LocalDateTime&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;br style=&quot;font-size: 16px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;updateAt :&amp;nbsp;&lt;span style=&quot;background-color: initial; font-size: 16px;&quot;&gt;LocalDateTime&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;br style=&quot;font-size: 16px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#b0e3e6;strokeColor=#0e8088;fontColor=#000000;fontStyle=1;fontSize=16;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
-          <mxGeometry x="469.5" y="-1540" width="510" height="400" as="geometry" />
+        <mxCell id="IrmACfk9YA6cMG1wpujl-53" value="&lt;h1 style=&quot;margin-top: 0px; font-size: 16px;&quot;&gt;id : Long&lt;/h1&gt;&lt;h1 style=&quot;margin-top: 0px; font-size: 16px;&quot;&gt;user : User&lt;/h1&gt;&lt;div&gt;title : String&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;type : Enum&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;br style=&quot;font-size: 16px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;importance : Enum&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;content : String&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;complete : Boolean&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;startTime :&amp;nbsp;&lt;span style=&quot;background-color: initial;&quot;&gt;LocalDateTime&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;endTime : LocalDateTime&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;br style=&quot;font-size: 16px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;createAt : LocalDateTime&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;br style=&quot;font-size: 16px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;updateAt :&amp;nbsp;&lt;span style=&quot;background-color: initial; font-size: 16px;&quot;&gt;LocalDateTime&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;br style=&quot;font-size: 16px;&quot;&gt;&lt;/div&gt;&lt;div style=&quot;font-size: 16px;&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#b0e3e6;strokeColor=#0e8088;fontColor=#000000;fontStyle=1;fontSize=16;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="724.75" y="-1910" width="510" height="400" as="geometry" />
         </mxCell>
-        <mxCell id="iHpuhIYsgUUPCUlInQz3-0" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;font style=&quot;font-size: 36px;&quot;&gt;버전 관리&lt;/font&gt;&lt;/h1&gt;&lt;div&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;1.0 기본 Application 설계도 구체 작성&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;1.1 - Todo와 Comment Service 로직 분리로 Aggregate 분리&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; - isCompleted 타입 추가 및 설계 추가&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;&lt;br&gt;&lt;/font&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="iHpuhIYsgUUPCUlInQz3-0" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;font style=&quot;font-size: 36px;&quot;&gt;버전 관리&lt;/font&gt;&lt;/h1&gt;&lt;div&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;1.0 기본 Application 설계도 구체 작성&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;1.1 - Todo와 Comment Service 로직 분리로 Aggregate 분리&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; - isCompleted 타입 추가 및 설계 추가&lt;br&gt;&lt;/font&gt;&lt;/div&gt;&lt;div&gt;&lt;font style=&quot;font-size: 24px;&quot;&gt;1.2 유저 식별을 위한 임시 세션 기능 추가&lt;/font&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="-1654" y="-2338" width="674" height="448" as="geometry" />
         </mxCell>
-        <mxCell id="iHpuhIYsgUUPCUlInQz3-1" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;완료 상태에서만 삭제 가능&lt;/h1&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;font color=&quot;#ff0000&quot;&gt;v.1.1&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#bac8d3;strokeColor=#23445d;fontColor=#000000;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+        <mxCell id="iHpuhIYsgUUPCUlInQz3-1" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;완료 상태에서만 삭제 가능&lt;/h1&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;&lt;font color=&quot;#ff0000&quot;&gt;v.1.1&lt;/font&gt;&lt;/b&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#bac8d3;strokeColor=#23445d;fontColor=#000000;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
           <mxGeometry x="2301" y="-1190" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uw58yZ7mXv-eaUINxGnE-0" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;임시 세션에 로그인 정보 저장&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-260" y="1760" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uw58yZ7mXv-eaUINxGnE-1" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;endWidth=55.55555555555555;endSize=19.333333333333332;width=41.66666666666667;fillColor=#26202E;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-162.49999999999994" y="1560" as="sourcePoint" />
+            <mxPoint x="-161" y="1750" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uw58yZ7mXv-eaUINxGnE-2" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;임시 세션에 로그인 정보 삭제&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1390" y="1440" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uw58yZ7mXv-eaUINxGnE-3" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;endWidth=55.55555555555555;endSize=19.333333333333332;width=41.66666666666667;fillColor=#26202E;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1100" y="1505.78" as="sourcePoint" />
+            <mxPoint x="1370" y="1506" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uw58yZ7mXv-eaUINxGnE-4" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;임시 세션 에서 관리자 여부 확인&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="730" y="2050" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uw58yZ7mXv-eaUINxGnE-5" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;임시 세션 에서 관리자 여부 확인&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="150" y="2050" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uw58yZ7mXv-eaUINxGnE-6" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;임시 세션 에서 관리자 여부 확인&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="1311" y="2050" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uw58yZ7mXv-eaUINxGnE-7" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;유저 프로필 입력&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="150" y="1500" width="180" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uw58yZ7mXv-eaUINxGnE-8" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;임시 세션 에서 관리자 여부 확인&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="150" y="1660" width="180" height="120" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

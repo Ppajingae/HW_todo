@@ -18,12 +18,17 @@ class Session(
     @Column(name = "is_admin")
     val isAdmin: Admin,
 
-):DateTime() {
+    @Column(name = "create_at")
+    val createAt: LocalDateTime = LocalDateTime.now(),
+
+    @Column(name = "update_at")
+    val updateAt: LocalDateTime = createAt.plusHours(6L),
+){
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
     fun checkAdmin():Boolean = isAdmin.name == Admin.ADMIN.name
 
-    fun checkTimeOut():Boolean = getUpdateAt() < LocalDateTime.now()
+    fun checkTimeOut():Boolean = updateAt < LocalDateTime.now()
 }

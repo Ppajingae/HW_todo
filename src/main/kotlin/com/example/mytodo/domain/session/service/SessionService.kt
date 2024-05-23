@@ -23,7 +23,7 @@ class SessionService(
     }
 
     fun getAdminSession(correctionId: Long){
-        val result = sessionRepository.findByUserId(correctionId)?: throw NoAuthorityException("해당 이메일은 존재하지 않습니다")
+        val result = sessionRepository.findByUserId(correctionId)?: throw NoAuthorityException("로그인이 되어있지 않습니다 로그인을 해주세요")
         if(!result.checkAdmin()) throw NoAuthorityException("관리자 권한이 없습니다")
         if(result.checkTimeOut()) throw TimeOutException("세션 만료")
 
@@ -37,6 +37,8 @@ class SessionService(
                 userId = result.id!!,
                 email = result.email,
                 isAdmin = result.isAdmin,
+                createAt = LocalDateTime.now(),
+                updateAt = LocalDateTime.now().plusHours(6L)
             )
         )
     }
