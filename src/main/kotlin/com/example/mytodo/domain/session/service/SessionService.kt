@@ -37,6 +37,8 @@ class SessionService(
                 userId = result.id!!,
                 email = result.email,
                 isAdmin = result.isAdmin,
+                createAt = LocalDateTime.now(),
+                updateAt = LocalDateTime.now().plusHours(6L)
             )
         )
     }
