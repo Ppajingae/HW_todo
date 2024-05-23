@@ -14,19 +14,11 @@
 
 
 ### 1. 앱 구상도
-![앱 기획 다이어그램](https://github.com/Ppajingae/HW_todo/blob/dev/src/main/resources/templates/image/Application%20%EA%B8%B0%ED%9A%8D.svg)
+![앱 기획 다이어그램](https://github.com/Ppajingae/HW_todo/blob/dev/src/main/resources/templates/image/ApplicationbluePoint.1.1.svg)
 
 <details>
 <summary style="font-size: 18px; font-weight: bold"> 1. 전체 적인 앱 기능</summary>
 <div markdown="1">     
-
-**전체 적으로 크게 2개의 aggregate 로 분류를 하였습니다**
-
-#### TODO List Aggregate
-
-- TODO List Aggregate 는 큰 시각 에서 봤을 때 유저의 할일을 CRUD 로 받아 주는 기능이 있습니다
-
-- 크게 2가지의 기능 으로 나뉘며 메인 으로 할 일들을 받아주고 처리 해주는 TODO 기능과 해당 기능에 코맨트를 달 수 있는 코맨트 기능이 있습니다
 
 ##### TODO
 
@@ -44,13 +36,18 @@
 
 - 댓글의 수정은 user 만 할 수 있습니다, 관리자는 댓글을 수정 하지 못하고 바로 삭제만 가능 합니다
 
-##### User Aggregate
+##### User
 
 - User는 사용자의 이메일과 비밀번호를 로그인 하여 프로필을 수정 후에 유저가 로그아웃 하는 작업을 진행 합니다
 
 - 추가로 관리자는 프로필을 수정할 시에 일반 유저의 정보를 수정할 수 있으며 (비밀번호 제외) 유저 에게 관리자 권한을 부여할 수 도 있다
 
 - 관리자는 일반 유저의 정보를 삭제할 수 있다
+
+##### Session
+
+- 유저가 로그인을 할 시에 로그인 정보를 담아 주는 역할을 한다
+- `User`를 도와서 Session 검증 해주는 역할을 하며 이 부분은 아직 보완이 필요한 상태로 보여서 추후에 리펙토링 예정이다
 </div>
 </details>
 
@@ -63,6 +60,7 @@ erDiagram
 User ||--o{ Comment : userId
 Todo ||--o{ Comment : todoId
 User ||--o{ Todo : userId
+User ||--|| Session : Userid
 
 
 User{
@@ -114,6 +112,15 @@ Todo{
     TIMESTAMP update_at
 
 }
+
+Session{
+    BIGINT id PK
+    BIGINT user_id
+    TEXT email
+    TEXT is_admin
+    TIMESTAMP create_at
+    TIMESTAMP update_at
+}
 ```
 - #### User
   
@@ -147,14 +154,19 @@ Todo{
 
   - `createAt`과 `updateAt`을 이용 하여 작성 시간과 업데이트 시간을 업데이트 예정 입니다
 
+- #### Session
+
+  - `User`와 OneToOne 관계 이지만 보다 범용성 있게 사용 하기 위해서 외래키 제약은 걸지 않고 구현 하였습니다
+
+  - `updateAt`은 기본 6시간 이후에 만료 되는 것으로 설정을 하였습니다 
+
 ### 3. 각 클래스의 구조도
 
-#### 3-1. TODO List Aggregate
+#### 3-1. TODO List
 
 ```mermaid
 classDiagram
 
-DateTime <|-- Comment
 DateTime <|-- Todo
 
 class DateTime{
@@ -166,23 +178,6 @@ class DateTime{
     fun setUpdateAt()
     fun getCreateAt()LocalDateTime
     fun getUpdateAt()LocalDateTime
-}
-
-class Comment{
-    <<Entity>>
-
-    String comment
-    User user
-    Todo todo 
-    Long? id  
-    LocalDateTime createAt 
-    LocalDateTime updateAt 
-
-    @JoinColumn("user_id")
-    @JoinColumn("todo_id")
-    @Id("id")
-
-    fun Comment.toResponse()CommentResponseDto
 }
 
 class Todo{
@@ -218,9 +213,13 @@ TodoService <|-- TodoServiceImpl
 class TodoService{
     fun getTodo(todoId: Long): TodoResponseDto
 
-    fun getTodoList()List[TodoResponseDto]
+    fun getTodoList(correctionId: Long) List[TodoResponseDto]
 
     fun getTodayTodoList(): List[TodoResponseDto]
+
+    fun getTodoListSorted(sortRequestDto: SortRequestDto): List[TodoResponseDto]
+
+    fun getUserTodoList(userId: Long): List[TodoResponseDto]
 
     fun createTodo(todoCreateRequestDto: TodoCreateRequestDto): TodoResponseDto
 
@@ -238,8 +237,9 @@ class TodoService{
 }
 
 class TodoServiceImpl{
-    private TodoRepository todoRepository
-    private CommentRepository commentRepository
+    private val TodoRepository todoRepository
+    private val sessionService SessionService
+    private val userService UserService
 
     fun getTodo(todoId: Long): TodoResponseDto
 
@@ -253,6 +253,59 @@ class TodoServiceImpl{
 
     fun deleteTodo(todoId: Long)
 
+    
+}
+
+```
+  - 서비스는 `TodoService`를 `TodoServiceImpl`가 상속을 받으면서 안에서 `Comment` 및 `Todo`의 비즈니스 로직을 관리 합니다
+  - 그외 컨트롤러 구성은 위에 서비스에 맞게 맵핑하여 구성하였습니다
+
+#### 3-2. Comment
+```mermaid
+
+classDiagram
+
+DateTime <|-- Comment
+
+class DateTime{
+    <<abstractClass>>
+    LocalDateTime createAt
+    LocalDateTime updateAt
+
+    fun firstDateTime()
+    fun setUpdateAt()
+    fun getCreateAt()LocalDateTime
+    fun getUpdateAt()LocalDateTime
+}
+
+class Comment{
+    <<Entity>>
+
+    String comment
+    User user
+    Todo todo 
+    Long? id  
+    LocalDateTime createAt 
+    LocalDateTime updateAt 
+
+    @JoinColumn("user_id")
+    @JoinColumn("todo_id")
+    @Id("id")
+
+    fun Comment.toResponse()CommentResponseDto
+}
+```
+
+- 피드백 이 후로 이것을 분리를 시킬지 고민 하다 Step2와 3의 과제를 보고 분리를 하는 것이 나을 것 같이사 Comment를 분리 하였습니다
+- 분리만 했을 뿐 로직은 이전과 같습 니다(권한 부분 제외)
+
+```mermaid
+classDiagram
+
+CommentService <|-- CommentServiceImpl
+    
+class CommentService{
+    <<interface>>
     fun createComment(todoId: Long, commentCreateRequestDto: CommentCreateRequestDto): CommentResponseDto
 
     fun getAllComments(todoId: Long): List[CommentResponseDto]
@@ -261,11 +314,22 @@ class TodoServiceImpl{
 
     fun deleteComment(todoId: Long, commentId: Long)
 }
-```
-  - 서비스는 `TodoService`를 `TodoServiceImpl`가 상속을 받으면서 안에서 `Comment` 및 `Todo`의 비즈니스 로직을 관리 합니다
-  - 그외 컨트롤러 구성은 위에 서비스에 맞게 맵핑하여 구성하였습니다
 
-#### 3-2. User Aggregate
+class CommentServiceImpl{
+    fun createComment(todoId: Long, commentCreateRequestDto: CommentCreateRequestDto): CommentResponseDto
+
+    fun getAllComments(todoId: Long): List[CommentResponseDto]
+
+    fun updateComment(todoId: Long, commentId: Long, commentUpdateRequestDto: CommentUpdateRequestDto): CommentResponseDto
+
+    fun deleteComment(todoId: Long, commentId: Long)
+} 
+```
+
+- 피드백 이후로 마찬가지로 분리 하였습니다 이외 로직은 동일 합니다(권한 부분 제외)
+
+
+#### 3-3. User
 
 ```mermaid
 classDiagram
@@ -345,9 +409,43 @@ classDiagram
 
         fun getAdminUserProfileList(correctionId:Long) List[UserResponseDto]
     }
+    
+    class commonUserService{
+        fun searchUserById(userId: Long) User
+        fun searchUserByEmail(email: String, password: String) User
+    }
 
+```
+ - 서비스는 `UserService`를 `UserServiceImpl`가 상속을 받으면서 안에서 `User` 의 비즈니스 로직을 관리 합니다
+ - 그외 컨트롤러 구성은 위에 서비스에 맞게 맵핑하여 구성하였습니다
+ - `User`는 현재 시간 부족 으로 `Signup` 함수만 구현한 후에 나머지 함수는 아직 구현 되지 않았습니다 
+ - commonUserService에는 보다 다른 Service 객체 에서 사용 할 수 있는 함수들만 모아봤습니다 이 것을 통해서 조금 더 DI에 가까워 졋다고 생각은 합니다(사실상 용도 별로 구분해 놓은 거긴 합니다)
 
-    class SessionService{
+#### 3-4 Session
+```mermaid
+classDiagram
+
+    class Session{
+        val userId: Long,
+        
+        val email : String,
+        
+        val isAdmin: Admin,
+        
+        val createAt: LocalDateTime,
+        
+        val updateAt: LocalDateTime,
+        
+        var id: Long
+        
+        fun checkAdmin() Boolean
+        
+        fun checkTimeOut() Boolean
+    }
+
+        
+    
+  class SessionService{
         fun getSession(userId: Long)
 
         fun getAdminSession(correctionId: Long)
@@ -359,9 +457,9 @@ classDiagram
         fun deleteSessionByUserId(userId: Long)
     }
 ```
- - 서비스는 `UserService`를 `UserServiceImpl`가 상속을 받으면서 안에서 `User` 의 비즈니스 로직을 관리 합니다
- - 그외 컨트롤러 구성은 위에 서비스에 맞게 맵핑하여 구성하였습니다
- - `User`는 현재 시간 부족 으로 `Signup` 함수만 구현한 후에 나머지 함수는 아직 구현 되지 않았습니다 
+
+- Session 은 기존에 Spring Security로 구현 하려 했지만 처음 사용 하는 저에게는 구현 비용이 상당히 많이 든다고 생각이 들어서 노선을 변경 하였습니다
+- 기존 JWT 방식 인증 -> 세션 방식 인증 으로 변경 -> 현재는 수동으로 모든 것을 검사하는 형태로 구현이 되어 있지만 Annotation으로 세션을 구현할 수 있다고 판단 하여 이후 구현할 예정 입니다
 
 ### 4. HotsPot
 
@@ -370,6 +468,8 @@ classDiagram
  - `administer` 기준 전체`user`의 할 일 전체 리스트를 조회 할 것인지 아니면 개인 것만 조회 하고 필요에 따라 다른 API 를 추가 할 것 인지에 대한 확정 사항 없음
 
  - 현재는 구현 되어 있지 않지만 관리자 외 접근 권한 예외를 따로 만들어서 예외 처리 할 예정 입니다
+
+ - 현재 인증은 수동으로 구현 하였습니다 따라서 이에 발생할 수 있는 많은 버그들이 있습니다 이에 위에서 언급 했다 싶이 Spring Security를 적용할 예정 입니다
 
 
 ### 5. 기타 버그 및 수정 사항
@@ -490,7 +590,7 @@ JSON parse error: Illegal unquoted character ((CTRL-CHAR, code 8)): has to be es
   - 문자열 앞에 공백 등이 있을 경우에 JSON이 Parse 되지 않는 현상
 
 - 해결
-  - 확인 중
+  - 문자열을 입력할 때 `trim()` 함수 사용
 
 #### AS-IS
 
@@ -502,10 +602,17 @@ JSON parse error: Illegal unquoted character ((CTRL-CHAR, code 8)): has to be es
 
   - 위 문제 해결 이후에 변수에 값을 입력할 시 제대로 변경 되지 않는 문제
 
+  - 원인
+      - 코드 상 에서는 특이 사항이 없는 부분 으로 확인 되었고 다만 동일 동일 변수를 다른 입력 값으로 입력 시에 추가 적인 부분이 생성 되지 않는 것으로 봤을 때 Swagger 쪽에서 자동 으로 판단 하고 만든 변수 라는 판단이 든다
+  - 해결
+      - isComplete 변수는 모두 complete로 변경
+      - 변수에 값 입력 문제는 `TodoUpdateRequestDto`에 complete 누락이 확인 되어서 다시 정의 후 정상 확인
+  
+
 
 ### 6. 환경 설정
 
-- Swagger.ui 접근 주소 : http://localhost:9090/swagger-ui/index.html
+- Swagger.ui 접근 주소 : http://localhost:8080/swagger-ui/index.html
 
 - IDE : IntelliJ unlimited
 
