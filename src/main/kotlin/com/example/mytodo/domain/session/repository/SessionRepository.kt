@@ -6,4 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface SessionRepository: JpaRepository<Session, Long>{
 
     fun findByUserId(userId: Long): Session?
+
+
+    fun existsByEmail(email: String): Boolean
 }

@@ -39,9 +39,10 @@ class UserServiceImpl(
     @Transactional
     override fun updateUserProfile(userId: Long, memberUpdateRequestDto: MembershipUpdateRequestDto): UserResponseDto {
         sessionService.getSession(userId)
-        if(!userRepository.existsByEmail(memberUpdateRequestDto.email)) throw IllegalStateException("중복 되는 이메일이 있습니다")
-        if(!userRepository.existsByNickname(memberUpdateRequestDto.nickname)) throw IllegalStateException("중복 되는 닉네임이 있습니다")
         val result = userRepository.findByIdOrNull(userId) ?: throw IdNotFoundException("User not found")
+        if(result.id != userId && userRepository.existsByEmail(memberUpdateRequestDto.email)) throw IllegalArgumentException("중복 되는 이메일이 있습니다")
+        if(userRepository.existsByNickname(memberUpdateRequestDto.nickname)) throw IllegalArgumentException("중복 되는 닉네임이 있습니다")
+
 
         result.update(memberUpdateRequestDto)
 

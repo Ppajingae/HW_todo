@@ -1,5 +1,6 @@
 package com.example.mytodo.domain.session.service
 
+import com.example.mytodo.domain.common.exception.DuplicatedLoginException
 import com.example.mytodo.domain.common.exception.NoAuthorityException
 import com.example.mytodo.domain.common.exception.NotSessionException
 import com.example.mytodo.domain.common.exception.TimeOutException
@@ -31,6 +32,7 @@ class SessionService(
 
     fun createSession(loginRequestDto: LoginRequestDto){
         val result = userService.searchUserByEmail(loginRequestDto.email, loginRequestDto.password)
+        if(sessionRepository.existsByEmail(loginRequestDto.email)) throw DuplicatedLoginException("중복 로그인은 불가능 합니다")
 
         sessionRepository.save(
             Session(

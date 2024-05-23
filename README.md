@@ -301,47 +301,63 @@ class User{
 ```mermaid
 classDiagram
 
-UserService <|-- UserServiceImpl
+    UserService <|-- UserServiceImpl
+    UserServiceImpl <|.. SessionService
 
-class UserService {
-    <<interface>>
-    fun signUp(membershipRequestDto: MembershipRequestDto) UserResponseDto
+    class UserService {
+        <<interface>>
+        fun signUp(membershipRequestDto: MembershipRequestDto) UserResponseDto
 
-    fun login(loginRequestDto: LoginRequestDto) UserResponseDto
+        fun login(loginRequestDto: LoginRequestDto) UserResponseDto
 
-    fun updateUserProfile(userId: Long, memberUpdateRequestDto: MembershipUpdateRequestDto) UserResponseDto
+        fun updateUserProfile(userId: Long, memberUpdateRequestDto: MembershipUpdateRequestDto) UserResponseDto
 
-    fun updateAdminUserProfile(correctionId:Long, userId: Long, membershipUpdateAdminRequestDto: MembershipUpdateAdminRequestDto) UserResponseDto
+        fun updateAdminUserProfile(correctionId:Long, userId: Long, membershipUpdateAdminRequestDto: MembershipUpdateAdminRequestDto) UserResponseDto
 
-    fun logout()
+        fun logout()
 
-    fun deleteAdminUserProfile(correctionId:Long, userId: Long) UserResponseDto
+        fun deleteAdminUserProfile(correctionId:Long, userId: Long) UserResponseDto
 
-    fun getAdminUserProfileList(correctionId:Long) List[UserResponseDto]
-}
-
-    
-
+        fun getAdminUserProfileList(correctionId:Long) List[UserResponseDto]
+    }
 
 
-    
-class UserServiceImpl{
-    private UserRepository userRepository
 
-    fun signUp(membershipRequestDto: MembershipRequestDto) UserResponseDto
 
-    fun login(loginRequestDto: LoginRequestDto) UserResponseDto
 
-    fun updateUserProfile(userId: Long, memberUpdateRequestDto: MembershipUpdateRequestDto) UserResponseDto
 
-    fun updateAdminUserProfile(correctionId:Long, userId: Long, membershipUpdateAdminRequestDto: MembershipUpdateAdminRequestDto) UserResponseDto
+    class UserServiceImpl{
 
-    fun logout()
+        private UserRepository: userRepository
+        private sessionService: SessionService
 
-    fun deleteAdminUserProfile(correctionId:Long, userId: Long) UserResponseDto
+        fun signUp(membershipRequestDto: MembershipRequestDto) UserResponseDto
 
-    fun getAdminUserProfileList(correctionId:Long) List[UserResponseDto]
-}
+        fun login(loginRequestDto: LoginRequestDto) UserResponseDto
+
+        fun updateUserProfile(userId: Long, memberUpdateRequestDto: MembershipUpdateRequestDto) UserResponseDto
+
+        fun updateAdminUserProfile(correctionId:Long, userId: Long, membershipUpdateAdminRequestDto: MembershipUpdateAdminRequestDto) UserResponseDto
+
+        fun logout()
+
+        fun deleteAdminUserProfile(correctionId:Long, userId: Long) UserResponseDto
+
+        fun getAdminUserProfileList(correctionId:Long) List[UserResponseDto]
+    }
+
+
+    class SessionService{
+        fun getSession(userId: Long)
+
+        fun getAdminSession(correctionId: Long)
+
+        fun createSession(loginRequestDto: LoginRequestDto)
+
+        fun deleteSession()
+
+        fun deleteSessionByUserId(userId: Long)
+    }
 ```
  - 서비스는 `UserService`를 `UserServiceImpl`가 상속을 받으면서 안에서 `User` 의 비즈니스 로직을 관리 합니다
  - 그외 컨트롤러 구성은 위에 서비스에 맞게 맵핑하여 구성하였습니다

@@ -43,6 +43,11 @@ class GlobalExceptionHandler {
 
     @ExceptionHandler(NotSessionException::class)
     fun notSessionException(e: Exception): ResponseEntity<ErrorResponseDto>{
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build()
+    }
+
+    @ExceptionHandler(DuplicatedLoginException::class)
+    fun duplicatedLoginException(e: Exception): ResponseEntity<ErrorResponseDto>{
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponseDto(e.message!!))
     }
 }
