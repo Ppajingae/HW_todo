@@ -5,8 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface UserRepository: JpaRepository<User, Long> {
 
-//    @Query("SELECT u.isAdmin FROM User u WHERE u.id = :id")
-//    fun findByIdAndIsAdmin(@Param("id")correctionId: Long):UserResponseDto
+    fun findByEmail(email: String): User?
 
-    fun findByEmail(email: String): User
+    fun existsByEmail(email: String): Boolean
+
+    fun existsByNickname(nickname: String): Boolean
 }

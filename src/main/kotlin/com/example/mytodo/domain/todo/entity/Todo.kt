@@ -45,8 +45,8 @@ class Todo(
     var comment: MutableList<Comment> = mutableListOf(),
 
     @ColumnDefault(value = "false")
-    @Column(name="is_complete", nullable = false)
-    var complete: Boolean = false
+    @Column(name="complete", nullable = false)
+    var complete: Boolean = false,
 
 ):DateTime(){
 
@@ -63,6 +63,7 @@ class Todo(
         content = todoUpdateRequestDto.content
         startTime = todoUpdateRequestDto.startTime ?: LocalDateTime.now()
         endTime = todoUpdateRequestDto.endTime
+        complete = todoUpdateRequestDto.complete
     }
 
 

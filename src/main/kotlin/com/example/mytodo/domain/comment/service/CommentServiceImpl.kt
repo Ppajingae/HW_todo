@@ -8,9 +8,9 @@ import com.example.mytodo.domain.comment.entity.Comment
 import com.example.mytodo.domain.comment.entity.toResponse
 import com.example.mytodo.domain.comment.repository.CommentRepository
 import com.example.mytodo.domain.common.DeleteResponseDto
-import com.example.mytodo.domain.exception.IdNotFoundException
+import com.example.mytodo.domain.common.exception.IdNotFoundException
 import com.example.mytodo.domain.todo.repository.TodoRepository
-import com.example.mytodo.domain.user.service.UserServiceImpl
+import com.example.mytodo.domain.user.service.CommonUserService
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional
 class CommentServiceImpl(
     private val commentRepository: CommentRepository,
     private val todoRepository: TodoRepository,
-    private val userService: UserServiceImpl,
+    private val userService: CommonUserService,
 ):CommentService {
 
     @Transactional

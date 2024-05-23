@@ -1,6 +1,6 @@
 package com.example.mytodo.domain.todo.controller
 
-import com.example.mytodo.domain.exception.StringLengthException
+import com.example.mytodo.domain.common.exception.StringLengthException
 import com.example.mytodo.domain.todo.dto.*
 import com.example.mytodo.domain.todo.service.TodoService
 import jakarta.validation.Valid

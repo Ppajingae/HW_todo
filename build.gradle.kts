@@ -34,6 +34,8 @@ dependencies {
     implementation("org.hibernate:hibernate-validator:8.0.1.Final")
     implementation("org.glassfish:jakarta.el:4.0.2")
     implementation("org.springframework.boot:spring-boot-starter-validation:3.2.1")
+//    implementation("org.springframework.boot:spring-boot-starter-security")
+
 
     runtimeOnly("org.postgresql:postgresql")
 
@@ -41,6 +43,7 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+//    testImplementation("org.springframework.security:spring-security-test")
 }
 
 tasks.withType<KotlinCompile> {

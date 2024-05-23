@@ -1,8 +1,9 @@
-package com.example.mytodo.domain.exception.handler
+package com.example.mytodo.domain.common.exception.handler
 
-import com.example.mytodo.domain.exception.*
-import com.example.mytodo.domain.exception.dto.ErrorResponseDto
+import com.example.mytodo.domain.common.exception.*
+import com.example.mytodo.domain.common.exception.dto.ErrorResponseDto
 import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -33,5 +34,15 @@ class GlobalExceptionHandler {
     @ExceptionHandler(StringLengthException::class)
     fun stringLengthException(e: Exception): ResponseEntity<ErrorResponseDto>{
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponseDto("Length of Error: ${e.message}"))
+    }
+
+    @ExceptionHandler(TimeOutException::class)
+    fun timeOutException(e: Exception): ResponseEntity<ErrorResponseDto>{
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ErrorResponseDto("인증이 만료 되었습니다"))
+    }
+
+    @ExceptionHandler(NotSessionException::class)
+    fun notSessionException(e: Exception): ResponseEntity<ErrorResponseDto>{
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
     }
 }

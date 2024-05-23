@@ -3,7 +3,10 @@ package com.example.mytodo.domain.user.entity
 import com.example.mytodo.domain.comment.entity.Comment
 import com.example.mytodo.domain.todo.entity.Todo
 import com.example.mytodo.domain.user.dto.Admin
+import com.example.mytodo.domain.user.dto.MembershipUpdateAdminRequestDto
+import com.example.mytodo.domain.user.dto.MembershipUpdateRequestDto
 import com.example.mytodo.domain.user.dto.UserResponseDto
+import com.example.mytodo.domain.user.repository.UserRepository
 import jakarta.persistence.*
 
 @Entity
@@ -11,17 +14,17 @@ import jakarta.persistence.*
 class User(
 
     @Column(name = "email", unique = true, nullable = false)
-    val email: String,
+    var email: String,
 
     @Column(name = "password", nullable = false)
-    val password: String,
+    var password: String,
 
     @Column(name = "nickname", nullable = false)
-    val nickname: String,
+    var nickname: String,
 
     @Enumerated(EnumType.STRING)
     @Column(name = "is_admin", nullable = false)
-    val isAdmin: Admin,
+    var isAdmin: Admin,
 
     @OneToMany(
         cascade = [(CascadeType.ALL)],
@@ -47,6 +50,15 @@ class User(
         return password == inputPassword
     }
 
+    fun update(membershipUpdateRequestDto: MembershipUpdateRequestDto){
+        email = membershipUpdateRequestDto.email
+        password = membershipUpdateRequestDto.password
+        nickname = membershipUpdateRequestDto.nickname
+    }
+
+    fun adminUpdate(membershipUpdateAdminRequestDto: MembershipUpdateAdminRequestDto){
+        isAdmin = membershipUpdateAdminRequestDto.isAdmin
+    }
 
 }
 

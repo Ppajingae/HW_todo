@@ -1,13 +1,13 @@
 package com.example.mytodo.domain.todo.service
 
-import com.example.mytodo.domain.exception.IdNotFoundException
-import com.example.mytodo.domain.exception.NotCompleteException
+import com.example.mytodo.domain.common.exception.IdNotFoundException
+import com.example.mytodo.domain.common.exception.NotCompleteException
 import com.example.mytodo.domain.todo.dto.*
 import com.example.mytodo.domain.todo.entity.Todo
 import com.example.mytodo.domain.todo.entity.toListResponse
 import com.example.mytodo.domain.todo.entity.toResponse
 import com.example.mytodo.domain.todo.repository.TodoRepository
-import com.example.mytodo.domain.user.service.UserServiceImpl
+import com.example.mytodo.domain.user.service.CommonUserService
 import org.springframework.data.domain.Sort
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -18,7 +18,7 @@ import java.time.LocalDateTime
 @Service
 class TodoServiceImpl(
     private val todoRepository: TodoRepository,
-    private val userService: UserServiceImpl,
+    private val userService: CommonUserService,
 ): TodoService {
 
 
