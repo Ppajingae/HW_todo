@@ -1,7 +1,5 @@
 # TODO 앱 기본 구성
 
-# 참고 : User 부분은 완전 미완성 상태입니다 그리고 현재 DELETE 기능 버그로 작동을 안하고 있습니다 이 부분도 빠르게 해결해보겠습니다
-
 ## 목차
 1. [전체 적인 앱 구상도
 ](#1-앱-구상도)
@@ -303,47 +301,63 @@ class User{
 ```mermaid
 classDiagram
 
-UserService <|-- UserServiceImpl
+    UserService <|-- UserServiceImpl
+    UserServiceImpl <|.. SessionService
 
-class UserService {
-    <<interface>>
-    fun signUp(membershipRequestDto: MembershipRequestDto) UserResponseDto
+    class UserService {
+        <<interface>>
+        fun signUp(membershipRequestDto: MembershipRequestDto) UserResponseDto
 
-    fun login(loginRequestDto: LoginRequestDto) UserResponseDto
+        fun login(loginRequestDto: LoginRequestDto) UserResponseDto
 
-    fun updateUserProfile(userId: Long, memberUpdateRequestDto: MembershipUpdateRequestDto) UserResponseDto
+        fun updateUserProfile(userId: Long, memberUpdateRequestDto: MembershipUpdateRequestDto) UserResponseDto
 
-    fun updateAdminUserProfile(correctionId:Long, userId: Long, membershipUpdateAdminRequestDto: MembershipUpdateAdminRequestDto) UserResponseDto
+        fun updateAdminUserProfile(correctionId:Long, userId: Long, membershipUpdateAdminRequestDto: MembershipUpdateAdminRequestDto) UserResponseDto
 
-    fun logout()
+        fun logout()
 
-    fun deleteAdminUserProfile(correctionId:Long, userId: Long) UserResponseDto
+        fun deleteAdminUserProfile(correctionId:Long, userId: Long) UserResponseDto
 
-    fun getAdminUserProfileList(correctionId:Long) List[UserResponseDto]
-}
-
-    
-
+        fun getAdminUserProfileList(correctionId:Long) List[UserResponseDto]
+    }
 
 
-    
-class UserServiceImpl{
-    private UserRepository userRepository
 
-    fun signUp(membershipRequestDto: MembershipRequestDto) UserResponseDto
 
-    fun login(loginRequestDto: LoginRequestDto) UserResponseDto
 
-    fun updateUserProfile(userId: Long, memberUpdateRequestDto: MembershipUpdateRequestDto) UserResponseDto
 
-    fun updateAdminUserProfile(correctionId:Long, userId: Long, membershipUpdateAdminRequestDto: MembershipUpdateAdminRequestDto) UserResponseDto
+    class UserServiceImpl{
 
-    fun logout()
+        private UserRepository: userRepository
+        private sessionService: SessionService
 
-    fun deleteAdminUserProfile(correctionId:Long, userId: Long) UserResponseDto
+        fun signUp(membershipRequestDto: MembershipRequestDto) UserResponseDto
 
-    fun getAdminUserProfileList(correctionId:Long) List[UserResponseDto]
-}
+        fun login(loginRequestDto: LoginRequestDto) UserResponseDto
+
+        fun updateUserProfile(userId: Long, memberUpdateRequestDto: MembershipUpdateRequestDto) UserResponseDto
+
+        fun updateAdminUserProfile(correctionId:Long, userId: Long, membershipUpdateAdminRequestDto: MembershipUpdateAdminRequestDto) UserResponseDto
+
+        fun logout()
+
+        fun deleteAdminUserProfile(correctionId:Long, userId: Long) UserResponseDto
+
+        fun getAdminUserProfileList(correctionId:Long) List[UserResponseDto]
+    }
+
+
+    class SessionService{
+        fun getSession(userId: Long)
+
+        fun getAdminSession(correctionId: Long)
+
+        fun createSession(loginRequestDto: LoginRequestDto)
+
+        fun deleteSession()
+
+        fun deleteSessionByUserId(userId: Long)
+    }
 ```
  - 서비스는 `UserService`를 `UserServiceImpl`가 상속을 받으면서 안에서 `User` 의 비즈니스 로직을 관리 합니다
  - 그외 컨트롤러 구성은 위에 서비스에 맞게 맵핑하여 구성하였습니다
@@ -480,9 +494,13 @@ JSON parse error: Illegal unquoted character ((CTRL-CHAR, code 8)): has to be es
 
 #### AS-IS
 
-#### 5-4 Delete 삭제가 안되는 애러 발생 <- Todo, Comment 전체 확인됨
+### 5-4 complete 변수 swagger 에서 적용이 되지 않는 문제
 
-- 현재 확인중입니다
+- 애러 내용
+
+  - isComplete 라는 변수 선언 시 swagger 에서 complete, isComplete까지 같이 생성 되는 문제
+
+  - 위 문제 해결 이후에 변수에 값을 입력할 시 제대로 변경 되지 않는 문제
 
 
 ### 6. 환경 설정

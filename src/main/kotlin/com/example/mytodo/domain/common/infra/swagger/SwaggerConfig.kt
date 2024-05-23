@@ -1,4 +1,4 @@
-package com.example.mytodo.domain.infra.swagger
+package com.example.mytodo.domain.common.infra.swagger
 
 import io.swagger.v3.oas.models.Components
 import io.swagger.v3.oas.models.OpenAPI

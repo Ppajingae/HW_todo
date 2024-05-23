@@ -1,13 +1,12 @@
 package com.example.mytodo.domain.todo.controller
 
-import com.example.mytodo.domain.todo.dto.TodoCreateRequestDto
-import com.example.mytodo.domain.todo.dto.TodoListResponseDto
-import com.example.mytodo.domain.todo.dto.TodoResponseDto
-import com.example.mytodo.domain.todo.dto.TodoUpdateRequestDto
+import com.example.mytodo.domain.common.exception.StringLengthException
+import com.example.mytodo.domain.todo.dto.*
 import com.example.mytodo.domain.todo.service.TodoService
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories
+import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 
 
@@ -22,9 +21,11 @@ class TodoController(
         return ResponseEntity.status(HttpStatus.OK).body(todoService.getTodo(todoId))
     }
 
-    @GetMapping
-    fun getTodoList(): ResponseEntity<List<TodoListResponseDto>> {
-        return ResponseEntity.status(HttpStatus.OK).body(todoService.getTodoList())
+    @GetMapping("/admin/{correctionId}")
+    fun getTodoList(
+        @PathVariable correctionId: Long,
+    ): ResponseEntity<List<TodoListResponseDto>> {
+        return ResponseEntity.status(HttpStatus.OK).body(todoService.getTodoList(correctionId))
     }
 
     @GetMapping("/day")
@@ -32,10 +33,31 @@ class TodoController(
         return ResponseEntity.status(HttpStatus.OK).body(todoService.getTodayTodoList())
     }
 
+    @PostMapping("/sort")
+    fun getTodoListSorted(
+        @RequestBody sortRequestDto: SortRequestDto
+    ): ResponseEntity<List<TodoListResponseDto>> {
+
+        return ResponseEntity.status(HttpStatus.OK).body(todoService.getTodoListSorted(sortRequestDto))
+    }
+
+    @GetMapping("/test/{userId}")
+    fun getUserTodoList(@PathVariable userId: Long): ResponseEntity<List<TodoListResponseDto>> {
+
+        return ResponseEntity.status(HttpStatus.OK).body(todoService.getUserTodoList(userId))
+    }
+
+
     @PostMapping
     fun createTodo(
-        @RequestBody todoCreateRequestDto: TodoCreateRequestDto)
-    :ResponseEntity<TodoResponseDto>  {
+        @Valid @RequestBody todoCreateRequestDto: TodoCreateRequestDto,
+        bindingResult: BindingResult
+    ):ResponseEntity<TodoResponseDto>  {
+        if(bindingResult.hasErrors()){
+
+           throw StringLengthException(bindingResult.fieldError?.defaultMessage.toString())
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(todoService.createTodo(todoCreateRequestDto))
     }
 

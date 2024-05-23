@@ -1,16 +1,15 @@
 package com.example.mytodo.domain.todo.service
 
-import com.example.mytodo.domain.exception.IdNotFoundException
-import com.example.mytodo.domain.exception.NotCompleteException
-import com.example.mytodo.domain.todo.dto.TodoCreateRequestDto
-import com.example.mytodo.domain.todo.dto.TodoListResponseDto
-import com.example.mytodo.domain.todo.dto.TodoResponseDto
-import com.example.mytodo.domain.todo.dto.TodoUpdateRequestDto
+import com.example.mytodo.domain.common.exception.IdNotFoundException
+import com.example.mytodo.domain.common.exception.NotCompleteException
+import com.example.mytodo.domain.session.service.SessionService
+import com.example.mytodo.domain.todo.dto.*
 import com.example.mytodo.domain.todo.entity.Todo
 import com.example.mytodo.domain.todo.entity.toListResponse
 import com.example.mytodo.domain.todo.entity.toResponse
 import com.example.mytodo.domain.todo.repository.TodoRepository
-import com.example.mytodo.domain.user.repository.UserRepository
+import com.example.mytodo.domain.user.service.CommonUserService
+import org.springframework.data.domain.Sort
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -20,15 +19,18 @@ import java.time.LocalDateTime
 @Service
 class TodoServiceImpl(
     private val todoRepository: TodoRepository,
-    private val userRepository: UserRepository,
+    private val sessionService: SessionService,
+    private val userService: CommonUserService,
 ): TodoService {
+
 
     override fun getTodo(todoId: Long): TodoResponseDto {
         val result = todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
         return result.toResponse()
     }
 
-    override fun getTodoList(): List<TodoListResponseDto> {
+    override fun getTodoList(correctionId: Long): List<TodoListResponseDto> {
+        sessionService.getAdminSession(correctionId)
 
         return todoRepository.findAll().map { it.toListResponse() }
     }
@@ -39,9 +41,24 @@ class TodoServiceImpl(
     }
 
     @Transactional
-    override fun createTodo(todoCreateRequestDto: TodoCreateRequestDto): TodoResponseDto {
-        val user = userRepository.findByIdOrNull(todoCreateRequestDto.userId)?: throw IdNotFoundException("User with ID ${todoCreateRequestDto.userId}")
+    override fun getTodoListSorted(sortRequestDto: SortRequestDto): List<TodoListResponseDto> {
+        val sort = Sort.by(if(sortRequestDto.sortBy) Sort.Direction.ASC else Sort.Direction.DESC, sortRequestDto.columnName)
 
+        return todoRepository.findAllBy(sort).map { it.toListResponse() }
+    }
+
+    override fun getUserTodoList(userId: Long): List<TodoListResponseDto> {
+        sessionService.getSession(userId)
+
+        return todoRepository.findByUserId(userId).map { it.toListResponse() }
+    }
+
+
+
+
+    @Transactional
+    override fun createTodo(todoCreateRequestDto: TodoCreateRequestDto): TodoResponseDto {
+        sessionService.getSession(todoCreateRequestDto.userId)
 
         return todoRepository.save(
             Todo(
@@ -51,27 +68,23 @@ class TodoServiceImpl(
                 startTime = todoCreateRequestDto.startTime ?: LocalDateTime.now(),
                 endTime = todoCreateRequestDto.endTime,
                 content = todoCreateRequestDto.content,
-                user = user
+                user = userService.searchUserById(todoCreateRequestDto.userId)
             )
         ).toResponse()
     }
 
     @Transactional
     override fun updateTodo(todoId: Long, todoUpdateRequestDto: TodoUpdateRequestDto): TodoResponseDto {
-        val result = todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
-        val (title, todoType, importance, content, isComplete, startTime, endTime) = todoUpdateRequestDto
 
-        result.title = title
-        result.type = todoType
-        result.importance = importance
-        result.content = content
-        result.isComplete = isComplete
-        result.startTime = startTime ?: LocalDateTime.now()
-        result.endTime = endTime
+        val todo = todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
 
-        return todoRepository.save(result).toResponse()
+        todo.update(todoUpdateRequestDto)
+
+        return todo.toResponse()
 
     }
+
+
 
     @Transactional
     override fun deleteTodo(todoId: Long) {

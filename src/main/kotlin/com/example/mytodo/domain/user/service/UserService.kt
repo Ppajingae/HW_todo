@@ -6,7 +6,7 @@ interface UserService {
 
     fun signUp(membershipRequestDto: MembershipRequestDto): UserResponseDto
 
-    fun login(loginRequestDto: LoginRequestDto): UserResponseDto
+    fun login(loginRequestDto: LoginRequestDto)
 
     fun updateUserProfile(userId: Long, memberUpdateRequestDto: MembershipUpdateRequestDto): UserResponseDto
 
@@ -14,7 +14,7 @@ interface UserService {
 
     fun logout()
 
-    fun deleteAdminUserProfile(correctionId:Long, userId: Long): UserResponseDto
+    fun deleteAdminUserProfile(correctionId:Long, userId: Long)
 
     fun getAdminUserProfileList(correctionId:Long): List<UserResponseDto>
 }
