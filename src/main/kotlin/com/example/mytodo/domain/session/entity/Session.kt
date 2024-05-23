@@ -23,10 +23,6 @@ class Session(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 
-    override fun setUpdateAt() {
-        getCreateAt().hour + 6
-    }
-
     fun checkAdmin():Boolean = isAdmin.name == Admin.ADMIN.name
 
     fun checkTimeOut():Boolean = getUpdateAt() < LocalDateTime.now()

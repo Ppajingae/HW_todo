@@ -15,7 +15,7 @@ abstract class DateTime {
     private var createAt: LocalDateTime = LocalDateTime.now()
 
     @Column(name = "update_at")
-    private var updateAt: LocalDateTime = LocalDateTime.now()
+    private var updateAt: LocalDateTime = LocalDateTime.now().plusHours(6)
 
     @PrePersist
     fun firstDateTime() {
@@ -25,7 +25,7 @@ abstract class DateTime {
 
     @PreUpdate
     fun setUpdateAt() {
-        updateAt = LocalDateTime.now()
+        updateAt = LocalDateTime.now().plusHours(6L)
     }
 
     fun getCreateAt(): LocalDateTime {
