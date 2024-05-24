@@ -14,7 +14,7 @@
 
 
 ### 1. 앱 구상도
-![앱 기획 다이어그램](https://github.com/Ppajingae/HW_todo/blob/dev/src/main/resources/templates/ApplicationbluePoint1.1.svg)
+![앱 기획 다이어그램](https://github.com/Ppajingae/HW_todo/blob/test/src/main/resources/templates/image/ApplicationbluePoint1.1.svg)
 
 <details>
 <summary style="font-size: 18px; font-weight: bold"> 1. 전체 적인 앱 기능</summary>
