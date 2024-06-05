@@ -1,5 +1,6 @@
 package com.example.mytodo.domain.comment.service.v1
 
+import com.example.mytodo.common.exception.IdNotFoundException
 import com.example.mytodo.domain.comment.dto.v1.CommentCreateRequestDto
 import com.example.mytodo.domain.comment.dto.v1.CommentDeleteRequestDto
 import com.example.mytodo.domain.comment.dto.v1.CommentResponseDto
@@ -8,8 +9,6 @@ import com.example.mytodo.domain.comment.entity.v1.Comment
 import com.example.mytodo.domain.comment.entity.v1.toResponse
 import com.example.mytodo.domain.comment.repository.v1.CommentRepository
 import com.example.mytodo.domain.common.dto.DeleteResponseDto
-import com.example.mytodo.common.exception.IdNotFoundException
-import com.example.mytodo.domain.session.service.v1.SessionService
 import com.example.mytodo.domain.todo.repository.v1.TodoRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -19,12 +18,10 @@ import org.springframework.transaction.annotation.Transactional
 class CommentServiceImpl(
     private val commentRepository: CommentRepository,
     private val todoRepository: TodoRepository,
-    private val sessionService: SessionService,
 ): CommentService {
 
     @Transactional
     override fun createComment(todoId: Long, commentCreateRequestDto: CommentCreateRequestDto): CommentResponseDto {
-        sessionService.getSession(commentCreateRequestDto.userId)
         val todoResult = todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
 
         return commentRepository.save(
@@ -44,7 +41,6 @@ class CommentServiceImpl(
 
     @Transactional
     override fun updateComment(todoId: Long, commentId: Long, commentUpdateRequestDto: CommentUpdateRequestDto): CommentResponseDto {
-        sessionService.getSession(commentUpdateRequestDto.userId)
         todoRepository.findByIdOrNull(todoId)?: throw IdNotFoundException("Todo with ID $todoId not found")
         val commentResult = commentRepository.findByIdOrNull(commentId) ?: throw IdNotFoundException("Not Comment")
 
@@ -59,7 +55,6 @@ class CommentServiceImpl(
 
     @Transactional
     override fun deleteComment(todoId: Long, commentId: Long, commentDeleteRequestDto: CommentDeleteRequestDto): DeleteResponseDto {
-        sessionService.getSession(commentDeleteRequestDto.userId)
         todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
         commentRepository.findByIdOrNull(commentId) ?: throw IdNotFoundException("Not Comment")
 

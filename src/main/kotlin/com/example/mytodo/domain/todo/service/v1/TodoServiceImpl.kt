@@ -2,7 +2,6 @@ package com.example.mytodo.domain.todo.service.v1
 
 import com.example.mytodo.common.exception.IdNotFoundException
 import com.example.mytodo.common.exception.NotCompleteException
-import com.example.mytodo.domain.session.service.v1.SessionService
 import com.example.mytodo.domain.todo.dto.v1.*
 import com.example.mytodo.domain.todo.entity.v1.Todo
 import com.example.mytodo.domain.todo.entity.v1.toListResponse
@@ -19,7 +18,6 @@ import java.time.LocalDateTime
 @Service
 class TodoServiceImpl(
     private val todoRepository: TodoRepository,
-    private val sessionService: SessionService,
     private val userService: CommonUserService,
 ): TodoService {
 
@@ -30,7 +28,6 @@ class TodoServiceImpl(
     }
 
     override fun getTodoList(correctionId: Long): List<TodoListResponseDto> {
-        sessionService.getAdminSession(correctionId)
 
         return todoRepository.findAll().map { it.toListResponse() }
     }
@@ -48,7 +45,6 @@ class TodoServiceImpl(
     }
 
     override fun getUserTodoList(userId: Long): List<TodoListResponseDto> {
-        sessionService.getSession(userId)
 
         return todoRepository.findByUserId(userId).map { it.toListResponse() }
     }
@@ -58,7 +54,6 @@ class TodoServiceImpl(
 
     @Transactional
     override fun createTodo(todoCreateRequestDto: TodoCreateRequestDto): TodoResponseDto {
-        sessionService.getSession(todoCreateRequestDto.userId)
 
         return todoRepository.save(
             Todo(
