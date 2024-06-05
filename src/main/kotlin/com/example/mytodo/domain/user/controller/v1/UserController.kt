@@ -19,7 +19,7 @@ class UserController(
     }
 
     @PostMapping("/login")
-    fun login(@RequestBody loginRequestDto: LoginRequestDto): ResponseEntity<Unit> {
+    fun login(@RequestBody loginRequestDto: LoginRequestDto): ResponseEntity<LoginResponseDto> {
 
         return ResponseEntity.status(HttpStatus.OK).body(userService.login(loginRequestDto))
     }

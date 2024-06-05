@@ -19,7 +19,7 @@ class GlobalExceptionHandler {
 
     @ExceptionHandler(NoAuthorityException::class)
     fun noAuthorityException(e: Exception): ResponseEntity<ErrorResponseDto> {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ErrorResponseDto("not Authority: ${e.message}"))
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ErrorResponseDto("not Authority: ${e.message}"))
     }
 
     @ExceptionHandler(NotCompleteException::class)
@@ -42,13 +42,19 @@ class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ErrorResponseDto("인증이 만료 되었습니다"))
     }
 
-    @ExceptionHandler(NotSessionException::class)
-    fun notSessionException(e: Exception): ResponseEntity<ErrorResponseDto>{
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build()
+    @ExceptionHandler(NotAuthenticationException::class)
+    fun notAuthenticationException(e: Exception): ResponseEntity<ErrorResponseDto>{
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ErrorResponseDto("인증 오류 : ${e.message}"))
     }
 
     @ExceptionHandler(DuplicatedLoginException::class)
     fun duplicatedLoginException(e: Exception): ResponseEntity<ErrorResponseDto>{
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponseDto(e.message!!))
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponseDto("중복 로그인 오류 : ${ e.message }"))
     }
+
+    @ExceptionHandler(IllegalArgumentException::class)
+    fun illegalArgumentException(e: IllegalArgumentException):ResponseEntity<ErrorResponseDto>{
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ErrorResponseDto("잘못된 값이 들어 갔습니다 : ${ e.message }"))
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.example.mytodo.domain.common.infra.security
+package com.example.mytodo.common.infra.security
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

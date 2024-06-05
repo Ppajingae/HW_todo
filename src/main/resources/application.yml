@@ -30,7 +30,7 @@ logging:
 
 auth:
   jwt:
-    issuer: team.sparta.com
-    secret: sdf24sg1gt2juy5mnm8b
-    accessTokenExpirationHour: 168
+    issuer : team.sparta.com
+    secret : sdf24sg1gt2juy5mnm8boo3jff22dk1snk1
+    accessTokenExpirationHour : 168
 

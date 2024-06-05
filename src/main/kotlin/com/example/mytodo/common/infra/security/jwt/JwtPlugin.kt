@@ -13,9 +13,9 @@ import java.time.Duration
 
 @Component
 class JwtPlugin(
-    @Value("\${jwt.issuer}") private val issuer: String,
-    @Value("\${jwt.secret}") private val secret: String,
-    @Value("\${jwt.accessTokenExpirationHour") private val accessTokenExpirationHour: Long,
+    @Value("\${auth.jwt.issuer}") private val issuer: String,
+    @Value("\${auth.jwt.secret}") private val secret: String,
+    @Value("\${auth.jwt.accessTokenExpirationHour}") private val accessTokenExpirationHour: Long,
 ) {
 
     fun validToken(jwt: String): Result<Jws<Claims>>{
@@ -31,7 +31,7 @@ class JwtPlugin(
         return generateToken(subject, email, role, Duration.ofHours(accessTokenExpirationHour))
     }
 
-    fun generateToken(subject: String, email: String, role: String, expirationPeriod : Duration): String{
+    private fun generateToken(subject: String, email: String, role: String, expirationPeriod : Duration): String{
 
          val key = Keys.hmacShaKeyFor(secret.toByteArray(StandardCharsets.UTF_8))
          val now = Instant.now()

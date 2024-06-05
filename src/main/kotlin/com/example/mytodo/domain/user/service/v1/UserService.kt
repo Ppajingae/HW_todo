@@ -6,7 +6,7 @@ interface UserService {
 
     fun signUp(membershipRequestDto: MembershipRequestDto): UserResponseDto
 
-    fun login(loginRequestDto: LoginRequestDto)
+    fun login(loginRequestDto: LoginRequestDto): LoginResponseDto
 
     fun updateUserProfile(userId: Long, memberUpdateRequestDto: MembershipUpdateRequestDto): UserResponseDto
 
