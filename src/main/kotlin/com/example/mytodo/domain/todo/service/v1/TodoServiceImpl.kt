@@ -1,7 +1,7 @@
 package com.example.mytodo.domain.todo.service.v1
 
-import com.example.mytodo.domain.common.exception.IdNotFoundException
-import com.example.mytodo.domain.common.exception.NotCompleteException
+import com.example.mytodo.common.exception.IdNotFoundException
+import com.example.mytodo.common.exception.NotCompleteException
 import com.example.mytodo.domain.session.service.v1.SessionService
 import com.example.mytodo.domain.todo.dto.v1.*
 import com.example.mytodo.domain.todo.entity.v1.Todo

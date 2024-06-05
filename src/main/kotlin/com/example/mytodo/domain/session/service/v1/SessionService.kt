@@ -1,9 +1,9 @@
 package com.example.mytodo.domain.session.service.v1
 
 import com.example.mytodo.domain.common.exception.DuplicatedLoginException
-import com.example.mytodo.domain.common.exception.NoAuthorityException
-import com.example.mytodo.domain.common.exception.NotSessionException
-import com.example.mytodo.domain.common.exception.TimeOutException
+import com.example.mytodo.common.exception.NoAuthorityException
+import com.example.mytodo.common.exception.NotSessionException
+import com.example.mytodo.common.exception.TimeOutException
 import com.example.mytodo.domain.session.entity.v1.Session
 import com.example.mytodo.domain.session.repository.SessionRepository
 import com.example.mytodo.domain.user.dto.v1.LoginRequestDto

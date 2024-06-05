@@ -26,3 +26,11 @@ logging:
             springframework:
               security: debug
 
+
+
+auth:
+  jwt:
+    issuer: team.sparta.com
+    secret: sdf24sg1gt2juy5mnm8b
+    accessTokenExpirationHour: 168
+

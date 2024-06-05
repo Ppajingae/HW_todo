@@ -8,7 +8,7 @@ import com.example.mytodo.domain.comment.entity.v1.Comment
 import com.example.mytodo.domain.comment.entity.v1.toResponse
 import com.example.mytodo.domain.comment.repository.v1.CommentRepository
 import com.example.mytodo.domain.common.dto.DeleteResponseDto
-import com.example.mytodo.domain.common.exception.IdNotFoundException
+import com.example.mytodo.common.exception.IdNotFoundException
 import com.example.mytodo.domain.session.service.v1.SessionService
 import com.example.mytodo.domain.todo.repository.v1.TodoRepository
 import org.springframework.data.repository.findByIdOrNull

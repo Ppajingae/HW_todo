@@ -1,4 +1,4 @@
-package com.example.mytodo.domain.common
+package com.example.mytodo.common
 
 import jakarta.persistence.Column
 import jakarta.persistence.MappedSuperclass

@@ -1,6 +1,6 @@
 package com.example.mytodo.domain.user.service.v1
 
-import com.example.mytodo.domain.common.exception.IdNotFoundException
+import com.example.mytodo.common.exception.IdNotFoundException
 import com.example.mytodo.domain.common.infra.security.BCryptImpl
 import com.example.mytodo.domain.session.service.v1.SessionService
 import com.example.mytodo.domain.user.dto.v1.*

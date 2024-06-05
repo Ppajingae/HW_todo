@@ -1,4 +1,4 @@
-package com.example.mytodo.domain.common.exception
+package com.example.mytodo.common.exception
 
 data class ModelNotFoundException (
     val msg: String

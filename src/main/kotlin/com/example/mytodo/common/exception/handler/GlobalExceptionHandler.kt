@@ -1,9 +1,10 @@
-package com.example.mytodo.domain.common.exception.handler
+package com.example.mytodo.common.exception.handler
 
-import com.example.mytodo.domain.common.exception.*
+import com.example.mytodo.common.exception.*
+import com.example.mytodo.domain.common.exception.DuplicatedLoginException
+import com.example.mytodo.domain.common.exception.StringLengthException
 import com.example.mytodo.domain.common.exception.dto.ErrorResponseDto
 import org.springframework.http.HttpStatus
-import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice

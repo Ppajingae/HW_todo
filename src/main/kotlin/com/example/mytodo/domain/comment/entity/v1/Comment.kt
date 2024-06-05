@@ -1,7 +1,7 @@
 package com.example.mytodo.domain.comment.entity.v1
 
 import com.example.mytodo.domain.comment.dto.v1.CommentResponseDto
-import com.example.mytodo.domain.common.DateTime
+import com.example.mytodo.common.DateTime
 import com.example.mytodo.domain.todo.entity.v1.Todo
 import com.example.mytodo.domain.user.entity.v1.User
 import com.fasterxml.jackson.annotation.JsonIgnore

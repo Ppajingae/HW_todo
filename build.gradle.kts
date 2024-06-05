@@ -36,9 +36,12 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation:3.2.1")
     implementation("at.favre.lib:bcrypt:0.9.0")
     implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("io.jsonwebtoken:jjwt-api:0.12.3")
 
 
     runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.12.3")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.12.3")
 
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
