@@ -77,6 +77,7 @@ class UserServiceImpl(
         userRepository.delete(result)
     }
 
+
     override fun getAdminUserProfileList(correctionId: Long): List<UserResponseDto> {
         sessionService.getAdminSession(correctionId)
         return userRepository.findAll().map { it.toResponse() }
