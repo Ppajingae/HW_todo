@@ -1,0 +1,22 @@
+package com.example.mytodo.domain.common.infra.security
+
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
+import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.web.SecurityFilterChain
+
+@Configuration
+@EnableWebSecurity
+class SpringSecurityConfig {
+
+    @Bean
+    fun filterChain(http: HttpSecurity):SecurityFilterChain{
+
+        return http
+            .httpBasic{ it.disable() }
+            .csrf { it.disable() }
+            .formLogin { it.disable() }
+            .build()
+    }
+}

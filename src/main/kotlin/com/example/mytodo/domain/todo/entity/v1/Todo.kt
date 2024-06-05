@@ -6,9 +6,12 @@ import com.example.mytodo.domain.todo.dto.v1.*
 import com.example.mytodo.domain.user.entity.v1.User
 import jakarta.persistence.*
 import org.hibernate.annotations.ColumnDefault
+import org.hibernate.annotations.SQLDelete
+import org.hibernate.annotations.SQLRestriction
 import java.time.LocalDateTime
 
-
+@SQLDelete(sql = "UPDATE todo SET deleted_at = current_timestamp,  is_deleted = true WHERE id = ?")
+@SQLRestriction("is_deleted = false")
 @Entity
 @Table(name = "todo")
 class Todo(
@@ -48,11 +51,19 @@ class Todo(
     @Column(name="complete", nullable = false)
     var complete: Boolean = false,
 
+
+
     ):DateTime(){
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
+
+    @Column(name= "is_deleted", nullable = false)
+    var isDeleted: Boolean = false
+
+    @Column(name= "deleted_at", nullable = false)
+    var deletedAt: LocalDateTime? = null
 
     fun checkComplete() = complete
 

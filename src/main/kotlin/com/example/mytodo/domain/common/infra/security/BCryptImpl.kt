@@ -1,4 +1,4 @@
-package com.example.mytodo.domain.common.security
+package com.example.mytodo.domain.common.infra.security
 
 import at.favre.lib.crypto.bcrypt.BCrypt
 

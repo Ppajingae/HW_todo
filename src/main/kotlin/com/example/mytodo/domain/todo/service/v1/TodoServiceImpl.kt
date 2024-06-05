@@ -92,7 +92,7 @@ class TodoServiceImpl(
 
         if(!result.checkComplete()) throw NotCompleteException("완료 상태로 전환 후에 다시 시도 해주세요")
 
-        todoRepository.deleteById(todoId)
+        todoRepository.delete(result)
     }
 
 }

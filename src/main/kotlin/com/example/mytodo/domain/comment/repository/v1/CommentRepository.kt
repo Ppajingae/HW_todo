@@ -1,5 +1,6 @@
 package com.example.mytodo.domain.comment.repository.v1
 
+import com.example.mytodo.domain.comment.dto.v1.CommentResponseDto
 import com.example.mytodo.domain.comment.entity.v1.Comment
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query

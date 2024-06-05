@@ -2,7 +2,7 @@ package com.example.mytodo.domain.user.service.v1
 
 import com.example.mytodo.domain.common.exception.IdNotFoundException
 import com.example.mytodo.domain.common.exception.NoAuthorityException
-import com.example.mytodo.domain.common.security.BCryptImpl
+import com.example.mytodo.domain.common.infra.security.BCryptImpl
 import com.example.mytodo.domain.user.entity.v1.User
 import com.example.mytodo.domain.user.repository.v1.UserRepository
 import org.springframework.data.repository.findByIdOrNull
@@ -21,7 +21,7 @@ class CommonUserService(
 
         val result = userRepository.findByEmail(email)?: throw IdNotFoundException("해당 유저의 아이디는 존재하지 않습니다")
 
-        if(BCryptImpl.validPassword(password, result.password)) throw NoAuthorityException("비밀번호가 틀렸습니다")
+        if(!BCryptImpl.validPassword(password, result.password)) throw NoAuthorityException("비밀번호가 틀렸습니다")
 
         return result
     }
