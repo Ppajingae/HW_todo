@@ -31,12 +31,12 @@ class JwtPlugin(
         return generateToken(subject, email, role, Duration.ofHours(accessTokenExpirationHour))
     }
 
-    private fun generateToken(subject: String, email: String, role: String, expirationPeriod : Duration): String{
+    private fun generateToken(subject: String, email: String, admin: String, expirationPeriod : Duration): String{
 
          val key = Keys.hmacShaKeyFor(secret.toByteArray(StandardCharsets.UTF_8))
          val now = Instant.now()
          val claims: Claims = Jwts.claims()
-             .add(mapOf("email" to email, "role" to role))
+             .add(mapOf("email" to email, "admin" to admin))
              .build()
 
 
