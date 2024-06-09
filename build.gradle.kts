@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm") version "1.9.23"
     kotlin("plugin.spring") version "1.9.23"
     kotlin("plugin.jpa") version "1.9.23"
+    kotlin("kapt") version "1.8.22"
 }
 
 group = "com.example"
@@ -21,9 +22,16 @@ configurations {
     }
 }
 
+
+
+
 repositories {
     mavenCentral()
 }
+
+val kotestVersion = "5.5.5"
+
+val mockkVersion = "1.13.8"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -45,9 +53,16 @@ dependencies {
 
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
+    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
+    testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
+    testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.3")
+    testImplementation("io.mockk:mockk:$mockkVersion")
 }
 
 tasks.withType<KotlinCompile> {
@@ -57,7 +72,8 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-tasks.withType<Test> {
+
+tasks.withType<Test>().configureEach() {
     useJUnitPlatform()
 }
 

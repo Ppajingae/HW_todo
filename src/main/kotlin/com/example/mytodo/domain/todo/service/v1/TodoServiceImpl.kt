@@ -10,6 +10,7 @@ import com.example.mytodo.domain.todo.repository.v1.TodoRepository
 import com.example.mytodo.domain.user.service.v1.CommonUserService
 import org.springframework.data.domain.Sort
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
@@ -21,13 +22,14 @@ class TodoServiceImpl(
     private val userService: CommonUserService,
 ): TodoService {
 
-
+    @PreAuthorize("hasRole('ADMIN') or hasRole('NORMAL_MEMBER')")
     override fun getTodo(todoId: Long): TodoResponseDto {
         val result = todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
         return result.toResponse()
     }
 
-    override fun getTodoList(correctionId: Long): List<TodoListResponseDto> {
+    @PreAuthorize("hasRole('ADMIN')")
+    override fun getTodoList(): List<TodoListResponseDto> {
 
         return todoRepository.findAll().map { it.toListResponse() }
     }
