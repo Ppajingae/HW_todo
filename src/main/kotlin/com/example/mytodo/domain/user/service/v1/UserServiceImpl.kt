@@ -64,7 +64,6 @@ class UserServiceImpl(
 
     @Transactional
     override fun updateAdminUserProfile(
-        correctionId: Long,
         userId: Long,
         membershipUpdateAdminRequestDto: MembershipUpdateAdminRequestDto
     ): UserResponseDto {
@@ -82,13 +81,13 @@ class UserServiceImpl(
     }
 
     @Transactional
-    override fun deleteAdminUserProfile(correctionId: Long, userId: Long){
+    override fun deleteAdminUserProfile(userId: Long){
         val result = userRepository.findByIdOrNull(userId) ?: throw IdNotFoundException("User not found")
         userRepository.delete(result)
     }
 
 
-    override fun getAdminUserProfileList(correctionId: Long): List<UserResponseDto> {
+    override fun getAdminUserProfileList(): List<UserResponseDto> {
         return userRepository.findAll().map { it.toResponse() }
     }
 

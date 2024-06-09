@@ -4,6 +4,7 @@ import com.example.mytodo.domain.user.dto.v1.*
 import com.example.mytodo.domain.user.service.v1.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
 
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*
 class UserController(
     private val userService: UserService
 ) {
+
 
     @PostMapping("/signUp")
     fun signUp(@RequestBody membershipRequestDto: MembershipRequestDto): ResponseEntity<UserResponseDto> {
@@ -24,6 +26,7 @@ class UserController(
         return ResponseEntity.status(HttpStatus.OK).body(userService.login(loginRequestDto))
     }
 
+    @PreAuthorize("hasRole('NORMAL_MEMBER') or hasRole('ADMIN')")
     @PutMapping("/{user_id}/profile")
     fun updateUserProfile(
         @PathVariable("user_id") userId: Long,
@@ -33,33 +36,38 @@ class UserController(
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateUserProfile(userId, membershipUpdateRequestDto))
     }
 
-    @PutMapping("/{correction_id}/{user_id}/profile")
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/admin/{user_id}/profile")
     fun updateAdminUserProfile(
-        @PathVariable("correction_id") correctionId: Long,
         @PathVariable("user_id") userId: Long,
         @RequestBody membershipUpdateAdminRequestDto: MembershipUpdateAdminRequestDto
     ): ResponseEntity<UserResponseDto> {
 
-        return ResponseEntity.status(HttpStatus.OK).body(userService.updateAdminUserProfile(correctionId, userId, membershipUpdateAdminRequestDto))
+        return ResponseEntity.status(HttpStatus.OK).body(userService.updateAdminUserProfile(userId, membershipUpdateAdminRequestDto))
     }
 
+    @PreAuthorize("hasRole('NORMAL_MEMBER') or hasRole('ADMIN')")
     @PostMapping("/logout")
     fun logout(){
         TODO()
     }
 
-    @DeleteMapping("/{correction_id}/{user_id}/profile")
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/admin/{user_id}/profile")
     fun deleteAdminUserProfile(
-        @PathVariable("correction_id") correctionId: Long,
         @PathVariable("user_id") userId: Long,
     ): ResponseEntity<UserResponseDto> {
+        userService.deleteAdminUserProfile(userId)
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
     }
 
-    @GetMapping("/{correction_id}/profile/all")
-    fun getAdminUserProfileList(@PathVariable("correction_id") correctionId: Long): ResponseEntity<List<UserResponseDto>> {
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/admin/profile/all")
+    fun getAdminUserProfileList(): ResponseEntity<List<UserResponseDto>> {
 
-        return ResponseEntity.status(HttpStatus.OK).body(userService.getAdminUserProfileList(correctionId))
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getAdminUserProfileList())
     }
+
+
 }
