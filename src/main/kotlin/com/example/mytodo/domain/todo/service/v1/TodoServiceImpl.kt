@@ -10,7 +10,6 @@ import com.example.mytodo.domain.todo.repository.v1.TodoRepository
 import com.example.mytodo.domain.user.service.v1.CommonUserService
 import org.springframework.data.domain.Sort
 import org.springframework.data.repository.findByIdOrNull
-import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.time.LocalDateTime
@@ -46,6 +45,8 @@ class TodoServiceImpl(
     }
 
     override fun getUserTodoList(userId: Long): List<TodoListResponseDto> {
+
+        userService.searchUserById(userId)
 
         return todoRepository.findByUserId(userId).map { it.toListResponse() }
     }

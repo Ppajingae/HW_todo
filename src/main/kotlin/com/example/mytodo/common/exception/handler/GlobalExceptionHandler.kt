@@ -1,8 +1,8 @@
 package com.example.mytodo.common.exception.handler
 
 import com.example.mytodo.common.exception.*
-import com.example.mytodo.domain.common.exception.DuplicatedLoginException
-import com.example.mytodo.domain.common.exception.StringLengthException
+import com.example.mytodo.common.exception.DuplicatedLoginException
+import com.example.mytodo.common.exception.StringLengthException
 import com.example.mytodo.common.exception.dto.ErrorResponseDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

@@ -81,8 +81,9 @@ class Todo(
 }
 
 fun Todo.toResponse(): TodoResponseDto {
+    val idValue = id ?: 0
     return TodoResponseDto(
-        id = id!!,
+        id = idValue,
         title = title,
         todoType = type,
         importance = importance,
@@ -97,8 +98,9 @@ fun Todo.toResponse(): TodoResponseDto {
 }
 
 fun Todo.toListResponse(): TodoListResponseDto {
+    val idValue = id ?: 0
     return TodoListResponseDto(
-        id = id!!,
+        id = idValue,
         title= title,
         todoType = type,
         importance = importance,
