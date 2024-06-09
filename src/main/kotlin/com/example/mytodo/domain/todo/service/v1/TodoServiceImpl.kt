@@ -22,13 +22,12 @@ class TodoServiceImpl(
     private val userService: CommonUserService,
 ): TodoService {
 
-    @PreAuthorize("hasRole('ADMIN') or hasRole('NORMAL_MEMBER')")
+
     override fun getTodo(todoId: Long): TodoResponseDto {
         val result = todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
         return result.toResponse()
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     override fun getTodoList(): List<TodoListResponseDto> {
 
         return todoRepository.findAll().map { it.toListResponse() }

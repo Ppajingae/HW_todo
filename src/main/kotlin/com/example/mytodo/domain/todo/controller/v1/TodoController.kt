@@ -6,6 +6,7 @@ import com.example.mytodo.domain.todo.service.v1.TodoService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
 
@@ -16,12 +17,13 @@ class TodoController(
     private val todoService: TodoService
 ) {
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('NORMAL_MEMBER')")
     @GetMapping("/{todoId}")
     fun getTodoById(@PathVariable todoId: Long):ResponseEntity<TodoResponseDto> {
         return ResponseEntity.status(HttpStatus.OK).body(todoService.getTodo(todoId))
     }
 
-
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin")
     fun getTodoList(
     ): ResponseEntity<List<TodoListResponseDto>> {
