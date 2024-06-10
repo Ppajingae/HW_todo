@@ -1,6 +1,7 @@
 package com.example.mytodo.domain.todo.service.v1
 
 import com.example.mytodo.common.exception.IdNotFoundException
+import com.example.mytodo.common.exception.NoAuthorityException
 import com.example.mytodo.common.exception.NotCompleteException
 import com.example.mytodo.domain.todo.dto.v1.*
 import com.example.mytodo.domain.todo.entity.v1.Todo
@@ -46,8 +47,6 @@ class TodoServiceImpl(
 
     override fun getUserTodoList(userId: Long): List<TodoListResponseDto> {
 
-        userService.searchUserById(userId)
-
         return todoRepository.findByUserId(userId).map { it.toListResponse() }
     }
 
@@ -55,7 +54,7 @@ class TodoServiceImpl(
 
 
     @Transactional
-    override fun createTodo(todoCreateRequestDto: TodoCreateRequestDto): TodoResponseDto {
+    override fun createTodo(todoCreateRequestDto: TodoCreateRequestDto, userId: Long): TodoResponseDto {
 
         return todoRepository.save(
             Todo(
@@ -65,15 +64,16 @@ class TodoServiceImpl(
                 startTime = todoCreateRequestDto.startTime ?: LocalDateTime.now(),
                 endTime = todoCreateRequestDto.endTime,
                 content = todoCreateRequestDto.content,
-                user = userService.searchUserById(todoCreateRequestDto.userId)
+                user = userService.searchUserById(userId)
             )
         ).toResponse()
     }
 
     @Transactional
-    override fun updateTodo(todoId: Long, todoUpdateRequestDto: TodoUpdateRequestDto): TodoResponseDto {
+    override fun updateTodo(todoId: Long, todoUpdateRequestDto: TodoUpdateRequestDto, userId: Long): TodoResponseDto {
 
         val todo = todoRepository.findByIdOrNull(todoId) ?: throw IdNotFoundException("Todo with ID $todoId not found")
+        if(!todo.checkUser(userId)) throw NoAuthorityException("작성자가 아닙니다")
 
         todo.update(todoUpdateRequestDto)
 

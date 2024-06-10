@@ -77,6 +77,10 @@ class Todo(
         complete = todoUpdateRequestDto.complete
     }
 
+    fun checkUser(userId: Long):Boolean{
+        return user.id == userId
+    }
+
 
 }
 
