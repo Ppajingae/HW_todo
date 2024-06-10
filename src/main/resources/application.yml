@@ -10,7 +10,7 @@ spring:
 
 
 server:
-  port: 8080
+  port: 7070
 
 
 
@@ -23,4 +23,14 @@ logging:
         orm:
           jdbc:
             bind: trace
+            springframework:
+              security: debug
+
+
+
+auth:
+  jwt:
+    issuer : team.sparta.com
+    secret : sdf24sg1gt2juy5mnm8boo3jff22dk1snk1
+    accessTokenExpirationHour : 168
 

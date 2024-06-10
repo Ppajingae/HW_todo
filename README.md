@@ -157,6 +157,8 @@ Session{
 
   - `createAt`과 `updateAt`을 이용 하여 작성 시간과 업데이트 시간을 업데이트 예정 입니다
 
+  - `todo` 는 SoftDelete 를 구현 하였습니다 해당 부분은 `isDeleted` 를 true 로 바꾸어 설정을 하였습니다
+
 - #### Session
 
   - `User`와 OneToOne 관계 이지만 보다 범용성 있게 사용 하기 위해서 외래키 제약은 걸지 않고 구현 하였습니다
@@ -424,45 +426,15 @@ classDiagram
  - `User`는 현재 시간 부족 으로 `Signup` 함수만 구현한 후에 나머지 함수는 아직 구현 되지 않았습니다 
  - commonUserService에는 보다 다른 Service 객체 에서 사용 할 수 있는 함수들만 모아봤습니다 이 것을 통해서 조금 더 DI에 가까워 졋다고 생각은 합니다(사실상 용도 별로 구분해 놓은 거긴 합니다)
 
-#### 3-4 Session
-```mermaid
-classDiagram
+### Jwt 인증 방식
 
-    class Session{
-        val userId: Long,
-        
-        val email : String,
-        
-        val isAdmin: Admin,
-        
-        val createAt: LocalDateTime,
-        
-        val updateAt: LocalDateTime,
-        
-        var id: Long
-        
-        fun checkAdmin() Boolean
-        
-        fun checkTimeOut() Boolean
-    }
+ - 기존에 session 인증 방식을 삭제 하고 Spring Security 를 활용한 Jwt 인증 방식을 사용 하였습니다
 
-        
-    
-  class SessionService{
-        fun getSession(userId: Long)
+ - Spring Security 의 chain 이 동작 하는 과정에서 jwt 토큰을 인증 하는 방식 으로 구성 하였습니다
 
-        fun getAdminSession(correctionId: Long)
+### Kakao OAuth 인증 방식
 
-        fun createSession(loginRequestDto: LoginRequestDto)
-
-        fun deleteSession()
-
-        fun deleteSessionByUserId(userId: Long)
-    }
-```
-
-- Session 은 기존에 Spring Security로 구현 하려 했지만 처음 사용 하는 저에게는 구현 비용이 상당히 많이 든다고 생각이 들어서 노선을 변경 하였습니다
-- 기존 JWT 방식 인증 -> 세션 방식 인증 으로 변경 -> 현재는 수동으로 모든 것을 검사하는 형태로 구현이 되어 있지만 Annotation으로 세션을 구현할 수 있다고 판단 하여 이후 구현할 예정 입니다
+- Kakao OAuth 인증 방식을 구현 하려 했으나 인증 토큰을 받아 오고 이 후에 어떤 방법 으로 구현 해야 할 지 몰라서 우선 보류 하였습니다   
 
 ### 4. HotsPot
 
@@ -470,9 +442,7 @@ classDiagram
 
  - `administer` 기준 전체`user`의 할 일 전체 리스트를 조회 할 것인지 아니면 개인 것만 조회 하고 필요에 따라 다른 API 를 추가 할 것 인지에 대한 확정 사항 없음
 
- - 현재는 구현 되어 있지 않지만 관리자 외 접근 권한 예외를 따로 만들어서 예외 처리 할 예정 입니다
-
- - 현재 인증은 수동으로 구현 하였습니다 따라서 이에 발생할 수 있는 많은 버그들이 있습니다 이에 위에서 언급 했다 싶이 Spring Security를 적용할 예정 입니다
+ - `todo` 에 softDelete 기술을 적용 하여 `isDeleted` 를 `true` 로 설정 하여 진행 하였 지만 해당 부분에 대한 삭제 정책이 완벽 하게 구현이 되어 있지는 않습니다 추가 적으로 해당 부분은 정책 검토 예정 입니다
 
 
 ### 5. 기타 버그 및 수정 사항
