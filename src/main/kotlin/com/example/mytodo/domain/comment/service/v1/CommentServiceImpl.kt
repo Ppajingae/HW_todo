@@ -8,7 +8,7 @@ import com.example.mytodo.domain.comment.dto.v1.CommentUpdateRequestDto
 import com.example.mytodo.domain.comment.entity.v1.Comment
 import com.example.mytodo.domain.comment.entity.v1.toResponse
 import com.example.mytodo.domain.comment.repository.v1.CommentRepository
-import com.example.mytodo.domain.common.dto.DeleteResponseDto
+import com.example.mytodo.common.dto.DeleteResponseDto
 import com.example.mytodo.domain.todo.repository.v1.TodoRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service

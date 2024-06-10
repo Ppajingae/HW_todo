@@ -5,8 +5,8 @@ import com.example.mytodo.domain.comment.dto.v1.CommentDeleteRequestDto
 import com.example.mytodo.domain.comment.dto.v1.CommentResponseDto
 import com.example.mytodo.domain.comment.dto.v1.CommentUpdateRequestDto
 import com.example.mytodo.domain.comment.service.v1.CommentService
-import com.example.mytodo.domain.common.ApiV1Config
-import com.example.mytodo.domain.common.dto.DeleteResponseDto
+import com.example.mytodo.common.ApiV1Config
+import com.example.mytodo.common.dto.DeleteResponseDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
