@@ -45,6 +45,7 @@ dependencies {
     implementation("at.favre.lib:bcrypt:0.9.0")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("io.jsonwebtoken:jjwt-api:0.12.3")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 
 
     runtimeOnly("org.postgresql:postgresql")

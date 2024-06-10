@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*
 
 
 @RestController
-@RequestMapping("/todo")
+@RequestMapping("/api/v1/todo")
 class TodoController(
     private val todoService: TodoService
 ) {
@@ -82,7 +82,10 @@ class TodoController(
     @PreAuthorize("hasRole('ADMIN') or hasRole('NORMAL_MEMBER')")
     @DeleteMapping("/{todoId}")
     fun deleteTodoById(@PathVariable todoId: Long):ResponseEntity<Unit>  {
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(todoService.deleteTodo(todoId))
+        // header checker
+        // token parser
+        val result = todoService.deleteTodo(todoId)
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(result)
     }
 
 }

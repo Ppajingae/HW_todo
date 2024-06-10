@@ -1,24 +1,32 @@
 package com.example.mytodo.domain.todo.controller
 
+import com.example.mytodo.common.exception.IdNotFoundException
 import com.example.mytodo.common.exception.StringLengthException
 import com.example.mytodo.common.infra.security.jwt.JwtPlugin
+import com.example.mytodo.domain.todo.controller.v1.TodoController
 import com.example.mytodo.domain.todo.dto.v1.*
+import com.example.mytodo.domain.todo.entity.v1.Todo
 import com.example.mytodo.domain.todo.service.v1.TodoService
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.extensions.spring.SpringExtension
 import io.kotest.matchers.shouldBe
-import io.mockk.clearAllMocks
-import io.mockk.every
+import io.mockk.*
 import io.mockk.junit5.MockKExtension
-import io.mockk.mockk
 import org.junit.jupiter.api.extension.ExtendWith
+import org.mockito.Mockito
+import org.mockito.Mockito.any
+import org.mockito.Mockito.doNothing
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.validation.BindingResult
 import java.time.LocalDateTime
 
 
@@ -27,7 +35,8 @@ import java.time.LocalDateTime
 @ExtendWith(MockKExtension::class)
 class TodoControllerTest @Autowired constructor(
     private val mockMvc: MockMvc,
-    private val jwtPlugin: JwtPlugin
+    private val jwtPlugin: JwtPlugin,
+    @MockBean private val todoService: TodoService,
 ): DescribeSpec({
 
     extensions(SpringExtension)
@@ -36,7 +45,8 @@ class TodoControllerTest @Autowired constructor(
         clearAllMocks()
     }
 
-    val todoService = mockk<TodoService>()
+
+
 
 
     describe("/todo/{todoId} 로 GET 요청 으로 조회를 했을 경우"){
@@ -44,21 +54,21 @@ class TodoControllerTest @Autowired constructor(
             it("Status 코드 200 과 조회 값을 Return 한다"){
                 val todoId = 20L
 
-                every {
-                    todoService.getTodo(any())
-                } returns TodoResponseDto(
+                val todoResponseDto = TodoResponseDto(
                     id = todoId,
-                    title = "Test",
                     todoType = TodoType.STUDY,
-                    importance = Importance.NORMAL,
-                    content = "Test",
-                    startTime = LocalDateTime.now(),
-                    endTime = LocalDateTime.now(),
-                    createAt = LocalDateTime.now(),
-                    updateAt = LocalDateTime.now(),
+                    title = "test",
                     complete = false,
                     comment = mutableListOf(),
+                    createAt = LocalDateTime.now(),
+                    content = "test",
+                    importance = Importance.NORMAL,
+                    startTime = LocalDateTime.now(),
+                    endTime = LocalDateTime.now(),
+                    updateAt = LocalDateTime.now(),
                 )
+
+                Mockito.`when`(todoService.getTodo(todoId)).thenReturn(todoResponseDto)
 
                 val jwtToken = jwtPlugin.generateAccessToken(
                     subject = "1",
@@ -67,7 +77,7 @@ class TodoControllerTest @Autowired constructor(
                 )
 
                 val result = mockMvc.perform(
-                    get("/todo/$todoId")
+                    get("/api/v1/todo/$todoId")
                         .header("Authorization", "Bearer $jwtToken")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
@@ -82,8 +92,7 @@ class TodoControllerTest @Autowired constructor(
     describe("/todo/admin 로 GET 요청 으로 조회를 했을 경우"){
         context("ADMIN 권한이 있을 경우"){
             it("Status 코드 200 과 조회 값을 Return 한다"){
-
-                every { todoService.getTodoList() } returns listOf(TodoListResponseDto(
+                val todoResponseDto = TodoListResponseDto(
                     id = 20L,
                     title = "TEST",
                     todoType = TodoType.STUDY,
@@ -94,7 +103,9 @@ class TodoControllerTest @Autowired constructor(
                     endTime = LocalDateTime.now(),
                     createAt = LocalDateTime.now(),
                     updateAt = LocalDateTime.now(),
-                ))
+                )
+
+                Mockito.`when`(todoService.getTodoList()).thenReturn(listOf(todoResponseDto))
 
                 val jwtToken = jwtPlugin.generateAccessToken(
                     subject = "1",
@@ -103,7 +114,7 @@ class TodoControllerTest @Autowired constructor(
                 )
 
                 val result = mockMvc.perform(
-                    get("/todo/admin")
+                    get("/api/v1/todo/admin")
                         .header("Authorization", "Bearer $jwtToken")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
@@ -115,7 +126,8 @@ class TodoControllerTest @Autowired constructor(
 
         context("관리자 권한이 없을 경우"){
             it("noAuthorityException 을 Return 한다"){
-                every { todoService.getTodoList() } returns listOf(TodoListResponseDto(
+
+                val todoListResponseDto = TodoListResponseDto(
                     id = 20L,
                     title = "TEST",
                     todoType = TodoType.STUDY,
@@ -126,7 +138,9 @@ class TodoControllerTest @Autowired constructor(
                     endTime = LocalDateTime.now(),
                     createAt = LocalDateTime.now(),
                     updateAt = LocalDateTime.now(),
-                ))
+                )
+
+                Mockito.`when`(todoService.getTodoList()).thenReturn(listOf(todoListResponseDto))
 
                 val jwtToken = jwtPlugin.generateAccessToken(
                     subject = "1",
@@ -134,9 +148,8 @@ class TodoControllerTest @Autowired constructor(
                     role = "NORMAL_MEMBER"
                 )
 
-                //shouldThrow 사용 하려고 했는데 해당 애러는 발생 하지 않았다고 나옵니다 이게 왜 그런 걸까요?
                 mockMvc.perform(
-                    get("/todo/admin")
+                    get("/api/v1/todo/admin")
                         .header("Authorization", "Bearer $jwtToken")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
@@ -146,24 +159,22 @@ class TodoControllerTest @Autowired constructor(
         }
     }
 
+    // 데이터를 못불러 옵니다
     describe("/todo/today 로 GET 요청 으로 조회를 했을 경우"){
         context("오늘 마감일 경우"){
             it("오늘 마감인 데이터 만 불러 온다"){
-//                val todoId = 20L
-//
-//                every {
-//                    todoService.getTodayTodoList()
-//                } returns listOf(
+//                val now = LocalDateTime.now()
+//                val todoList = listOf(
 //                    TodoListResponseDto(
-//                        id = todoId,
+//                        id = 20L,
 //                        title = "Test",
 //                        todoType = TodoType.STUDY,
 //                        importance = Importance.NORMAL,
 //                        content = "Test",
-//                        startTime = LocalDateTime.now(),
-//                        endTime = LocalDateTime.now(),
-//                        createAt = LocalDateTime.now(),
-//                        updateAt = LocalDateTime.now(),
+//                        startTime = now,
+//                        endTime = now,
+//                        createAt = now,
+//                        updateAt = now,
 //                        complete = false,
 //                    ), TodoListResponseDto(
 //                        id = 21L,
@@ -171,24 +182,15 @@ class TodoControllerTest @Autowired constructor(
 //                        todoType = TodoType.STUDY,
 //                        importance = Importance.NORMAL,
 //                        content = "Test",
-//                        startTime = LocalDateTime.now().minusDays(1),
-//                        endTime = LocalDateTime.now().plusDays(1),
-//                        createAt = LocalDateTime.now().minusDays(1),
-//                        updateAt = LocalDateTime.now().minusDays(1),
-//                        complete = false,
-//                    ), TodoListResponseDto(
-//                        id = 22L,
-//                        title = "Test",
-//                        todoType = TodoType.STUDY,
-//                        importance = Importance.NORMAL,
-//                        content = "Test",
-//                        startTime = LocalDateTime.now().minusDays(1),
-//                        endTime = LocalDateTime.now().plusDays(1),
-//                        createAt = LocalDateTime.now().minusDays(1),
-//                        updateAt = LocalDateTime.now().minusDays(1),
+//                        startTime = now.minusDays(1),
+//                        endTime = now,
+//                        createAt = now.minusDays(1),
+//                        updateAt = now.minusDays(1),
 //                        complete = false,
 //                    )
 //                )
+//
+//                Mockito.`when`(todoService.getTodayTodoList()).thenReturn(todoList)
 //
 //                val jwtToken = jwtPlugin.generateAccessToken(
 //                    subject = "1",
@@ -197,7 +199,7 @@ class TodoControllerTest @Autowired constructor(
 //                )
 //
 //                val result = mockMvc.perform(
-//                    get("/todo/day")
+//                    get("/api/v1/todo/day")
 //                        .header("Authorization", "Bearer $jwtToken")
 //                        .contentType(MediaType.APPLICATION_JSON)
 //                        .accept(MediaType.APPLICATION_JSON)
@@ -207,16 +209,16 @@ class TodoControllerTest @Autowired constructor(
 //                val responseBody: List<TodoListResponseDto> = objectMapper.readValue(result.response.contentAsString)
 //
 //                result.response.status shouldBe 200
-//                responseBody.size shouldBe 1
+//                responseBody.size shouldBe 2
 
 
             }
         }
     }
 
-    describe("/todo 로 POST 요청 으로 작성을 했을 경우"){
-        context("제목의 길이가 200자 이상 이거나 1자 이하일 경우"){
-            it("StringLengthException 을 throw"){
+    describe("/todo 로 POST 요청 으로 작성을 했을 경우") {
+        context("제목의 길이가 200자 이상 이거나 1자 이하일 경우") {
+            it("StringLengthException 을 throw") {
 
                 val todoCreateRequestDto = TodoCreateRequestDto(
                     title = "",
@@ -228,9 +230,7 @@ class TodoControllerTest @Autowired constructor(
                     endTime = LocalDateTime.now(),
                 )
 
-                every {
-                    todoService.createTodo(todoCreateRequestDto)
-                } throws StringLengthException("최소 1자 이상 200자 까지 입력 가능 합니다")
+                Mockito.`when`(todoService.createTodo(todoCreateRequestDto)).thenThrow(StringLengthException("최소 1자 이상 200자 까지 입력 가능 합니다"))
 
 
                 val jwtToken = jwtPlugin.generateAccessToken(
@@ -240,7 +240,7 @@ class TodoControllerTest @Autowired constructor(
                 )
 
                 val result = mockMvc.perform(
-                    post("/todo")
+                    post("/api/v1/todo")
                         .header("Authorization", "Bearer $jwtToken")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
@@ -251,8 +251,8 @@ class TodoControllerTest @Autowired constructor(
 
             }
         }
-        context("내용의 길이가 200자 이상 이거나 1자 이하일 경우"){
-            it("StringLengthException 을 throw"){
+        context("내용의 길이가 200자 이상 이거나 1자 이하일 경우") {
+            it("StringLengthException 을 throw") {
 
                 val todoCreateRequestDto = TodoCreateRequestDto(
                     title = "test",
@@ -264,9 +264,8 @@ class TodoControllerTest @Autowired constructor(
                     endTime = LocalDateTime.now(),
                 )
 
-                every {
-                    todoService.createTodo(todoCreateRequestDto)
-                } throws StringLengthException("최소 1자 이상 1000자 까지 입력 가능 합니다")
+                Mockito.`when`(todoService.createTodo(todoCreateRequestDto)).thenThrow(StringLengthException("최소 1자 이상 1000자 까지 입력 가능 합니다"))
+
 
 
                 val jwtToken = jwtPlugin.generateAccessToken(
@@ -276,7 +275,7 @@ class TodoControllerTest @Autowired constructor(
                 )
 
                 val result = mockMvc.perform(
-                    post("/todo")
+                    post("/api/v1/todo")
                         .header("Authorization", "Bearer $jwtToken")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
@@ -287,9 +286,10 @@ class TodoControllerTest @Autowired constructor(
 
             }
         }
-//        context("정상적 으로 보낼 경우"){
-//            it("Status 200을 리턴"){
-//
+        context("정상적 으로 보낼 경우"){
+            // bindResult 를 어떤 방식 으로 처리 해야 할지 모르겠습니다
+            it("Status 200을 리턴"){
+
 //                val todoCreateRequestDto = TodoCreateRequestDto(
 //                    title = "test",
 //                    content = "test",
@@ -300,9 +300,7 @@ class TodoControllerTest @Autowired constructor(
 //                    endTime = LocalDateTime.now(),
 //                )
 //
-//                every {
-//                    todoService.createTodo(todoCreateRequestDto)
-//                } returns TodoResponseDto(
+//                val todoResponseDto = TodoResponseDto(
 //                    id = 25L,
 //                    title = todoCreateRequestDto.title,
 //                    content = todoCreateRequestDto.content,
@@ -316,6 +314,9 @@ class TodoControllerTest @Autowired constructor(
 //                    updateAt = LocalDateTime.now(),
 //                )
 //
+//                //bindResult 를 어떤 식으로 처리 해야 할지 모르겠습니다
+//                Mockito.`when`(todoService.createTodo(todoCreateRequestDto)).thenReturn(todoResponseDto)
+//
 //
 //                val jwtToken = jwtPlugin.generateAccessToken(
 //                    subject = "1",
@@ -324,7 +325,7 @@ class TodoControllerTest @Autowired constructor(
 //                )
 //
 //                val result = mockMvc.perform(
-//                    post("/todo")
+//                    post("/api/v1/todo")
 //                        .header("Authorization", "Bearer $jwtToken")
 //                        .contentType(MediaType.APPLICATION_JSON)
 //                        .accept(MediaType.APPLICATION_JSON)
@@ -332,15 +333,15 @@ class TodoControllerTest @Autowired constructor(
 //
 //
 //                result.response.status shouldBe 200
-//
-//            }
-//        }
+
+            }
+        }
 
     }
 
-    describe("/todo/{todoId} 로 PUT 요청 으로 업데이트를 했을 경우"){
-        context("제목의 길이가 200자 이상 이거나 1자 이하일 경우"){
-            it("StringLengthException 을 throw"){
+    describe("/todo/{todoId} 로 PUT 요청 으로 업데이트를 했을 경우") {
+        context("제목의 길이가 200자 이상 이거나 1자 이하일 경우") {
+            it("StringLengthException 을 throw") {
                 val todoId = 20L
 
                 val todoUpdateRequestDto = TodoUpdateRequestDto(
@@ -353,9 +354,7 @@ class TodoControllerTest @Autowired constructor(
                     complete = false
                 )
 
-                every {
-                    todoService.updateTodo(todoId, todoUpdateRequestDto)
-                } throws StringLengthException("최소 1자 이상 200자 까지 입력 가능 합니다")
+                Mockito.`when`(todoService.updateTodo(todoId, todoUpdateRequestDto)).thenThrow(StringLengthException("최소 1자 이상 200자 까지 입력 가능 합니다"))
 
 
                 val jwtToken = jwtPlugin.generateAccessToken(
@@ -365,7 +364,7 @@ class TodoControllerTest @Autowired constructor(
                 )
 
                 val result = mockMvc.perform(
-                    put("/todo/$todoId")
+                    put("/api/v1/todo/$todoId")
                         .header("Authorization", "Bearer $jwtToken")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
@@ -376,8 +375,8 @@ class TodoControllerTest @Autowired constructor(
 
             }
         }
-        context("내용의 길이가 200자 이상 이거나 1자 이하일 경우"){
-            it("StringLengthException 을 throw"){
+        context("내용의 길이가 200자 이상 이거나 1자 이하일 경우") {
+            it("StringLengthException 을 throw") {
                 val todoId = 20L
 
                 val todoCreateUpdateDto = TodoUpdateRequestDto(
@@ -390,9 +389,8 @@ class TodoControllerTest @Autowired constructor(
                     complete = false
                 )
 
-                every {
-                    todoService.updateTodo(todoId, todoCreateUpdateDto)
-                } throws StringLengthException("최소 1자 이상 1000자 까지 입력 가능 합니다")
+                Mockito.`when`(todoService.updateTodo(todoId, todoCreateUpdateDto)).thenThrow(StringLengthException("최소 1자 이상 1000자 까지 입력 가능 합니다"))
+
 
 
                 val jwtToken = jwtPlugin.generateAccessToken(
@@ -402,7 +400,7 @@ class TodoControllerTest @Autowired constructor(
                 )
 
                 val result = mockMvc.perform(
-                    put("/todo/$todoId")
+                    put("/api/v1/todo/$todoId")
                         .header("Authorization", "Bearer $jwtToken")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
@@ -413,9 +411,10 @@ class TodoControllerTest @Autowired constructor(
 
             }
         }
-//        context("정상적 으로 보낼 경우"){
-//            it("Status 200을 리턴"){
-//
+        context("정상적 으로 보낼 경우"){
+            // bindingResult 를 처리 하지 못했 습니다
+            it("Status 200을 리턴"){
+
 //                val todoId = 20L
 //                val todoUpdateRequestDto = TodoUpdateRequestDto(
 //                    title = "test",
@@ -427,9 +426,7 @@ class TodoControllerTest @Autowired constructor(
 //                    complete = false
 //                )
 //
-//                every {
-//                    todoService.updateTodo(todoId, todoUpdateRequestDto)
-//                } returns TodoResponseDto(
+//                val todoResponseDto = TodoResponseDto(
 //                    id = todoId,
 //                    title = todoUpdateRequestDto.title,
 //                    content = todoUpdateRequestDto.content,
@@ -443,6 +440,8 @@ class TodoControllerTest @Autowired constructor(
 //                    updateAt = LocalDateTime.now(),
 //                )
 //
+//                Mockito.`when`(todoService.updateTodo(todoId, todoUpdateRequestDto)).thenReturn(todoResponseDto)
+//
 //
 //                val jwtToken = jwtPlugin.generateAccessToken(
 //                    subject = "1",
@@ -451,7 +450,7 @@ class TodoControllerTest @Autowired constructor(
 //                )
 //
 //                val result = mockMvc.perform(
-//                    put("/todo/$todoId")
+//                    put("/api/v1/todo/$todoId")
 //                        .header("Authorization", "Bearer $jwtToken")
 //                        .contentType(MediaType.APPLICATION_JSON)
 //                        .accept(MediaType.APPLICATION_JSON)
@@ -459,23 +458,18 @@ class TodoControllerTest @Autowired constructor(
 //
 //
 //                result.response.status shouldBe 200
-//
-//            }
-//        }
+
+            }
+        }
 
     }
 
-    describe("/todo/{todoId} 로 DELETE 요청 으로 삭제를 했을 경우"){
-        context("정상적 으로 보낼 경우"){
-            it("Status 200을 리턴"){
+    describe("/todo/{todoId} 로 DELETE 요청 으로 삭제를 했을 경우") {
+        context("정상적 으로 보낼 경우") {
+            it("Status 204을 리턴") {
 
                 val todoId = 20L
-
-
-                every {
-                    todoService.deleteTodo(todoId)
-                }
-
+                doNothing().`when`(todoService).deleteTodo(todoId)
 
                 val jwtToken = jwtPlugin.generateAccessToken(
                     subject = "1",
@@ -484,7 +478,7 @@ class TodoControllerTest @Autowired constructor(
                 )
 
                 val result = mockMvc.perform(
-                    delete("/todo/$todoId")
+                    delete("/api/v1/todo/$todoId")
                         .header("Authorization", "Bearer $jwtToken")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
@@ -495,7 +489,34 @@ class TodoControllerTest @Autowired constructor(
 
             }
         }
-
     }
 
-})
+    describe("/todo/{todoId} 로 DELETE 요청 으로 삭제를 했을 경우 이미 삭제된 경우") {
+        context("정상적 으로 보낼 경우") {
+            it("Status 404을 리턴") {
+
+                val todoId = 20L
+
+                Mockito.`when`(todoService.deleteTodo(todoId)).thenThrow(IdNotFoundException::class.java)
+
+                val jwtToken = jwtPlugin.generateAccessToken(
+                    subject = "1",
+                    email = "yrjo@gmail.com",
+                    role = "ADMIN"
+                )
+
+                val result = mockMvc.perform(
+                    delete("/api/v1/todo/$todoId")
+                        .header("Authorization", "Bearer $jwtToken")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                ).andReturn()
+
+
+                result.response.status shouldBe 404
+
+            }
+        }
+    }
+
+    })
