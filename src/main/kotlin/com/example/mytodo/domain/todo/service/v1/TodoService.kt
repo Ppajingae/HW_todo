@@ -15,9 +15,9 @@ interface TodoService {
 
     fun getTodoListSorted(sortRequestDto: SortRequestDto): List<TodoListResponseDto>
 
-    fun createTodo(todoCreateRequestDto: TodoCreateRequestDto): TodoResponseDto
+    fun createTodo(todoCreateRequestDto: TodoCreateRequestDto, userId: Long): TodoResponseDto
 
-    fun updateTodo(todoId: Long, todoUpdateRequestDto: TodoUpdateRequestDto): TodoResponseDto
+    fun updateTodo(todoId: Long, todoUpdateRequestDto: TodoUpdateRequestDto, userId: Long): TodoResponseDto
 
     fun deleteTodo(todoId: Long)
 

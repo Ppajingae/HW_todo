@@ -21,12 +21,12 @@ import io.mockk.clearAllMocks
 import io.mockk.every
 import io.mockk.junit5.MockKExtension
 import io.mockk.mockk
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.data.repository.findByIdOrNull
 import java.time.LocalDateTime
 
-@SpringBootTest
+
 @ExtendWith(MockKExtension::class)
 class TodoServiceTest:BehaviorSpec({
 
@@ -42,42 +42,39 @@ class TodoServiceTest:BehaviorSpec({
     val todoService = TodoServiceImpl(todoRepository, userService)
     val userRepository = mockk<UserRepository>()
 
-    Given("특정 TODO를 조회 해서"){
-        When("TODO가 있을 경우"){
-            Then("TodoResponseDto 를 반환 한다"){
-                val todoId = 20L
-                every { todoRepository.findByIdOrNull(any()) } returns Todo(
-                    title = "et",
-                    comment = mutableListOf(),
-                    complete = false,
-                    content = "dfs",
-                    startTime = LocalDateTime.now(),
-                    endTime = LocalDateTime.now(),
-                    importance = Importance.NORMAL,
-                    type = TodoType.STUDY,
-                    user = User(
-                        email = "test@test",
-                        password = "test",
-                        todo = mutableListOf(),
-                        comment = mutableListOf(),
-                        isAdmin = Admin.ADMIN,
-                        nickname = "Kim"
-                    )
-                )
-            }
-        }
-        When("TODO가 없을 경우"){
-            Then("IdNotFoundException 을 Return 한다"){
-                val todoId = 10L
+    @Test
+    fun `특정 TODO를 조회 해서 TODO가 있을 경우 TodoResponseDto 를 반환`(){
+        val todoId = 20L
+        every { todoRepository.findByIdOrNull(any()) } returns Todo(
+            title = "et",
+            comment = mutableListOf(),
+            complete = false,
+            content = "dfs",
+            startTime = LocalDateTime.now(),
+            endTime = LocalDateTime.now(),
+            importance = Importance.NORMAL,
+            type = TodoType.STUDY,
+            user = User(
+                email = "test@test",
+                password = "test",
+                todo = mutableListOf(),
+                comment = mutableListOf(),
+                isAdmin = Admin.ADMIN,
+                nickname = "Kim"
+            ))
+    }
 
-                every { todoRepository.findByIdOrNull(any()) } returns null
+    @Test
+    fun `특정 TODO를 조회 해서 TODO가 없을 경우 IdNotFoundException 을 Return`(){
+        val todoId = 10L
 
-                shouldThrow<IdNotFoundException> {
-                    todoService.getTodo(todoId)
-                }
-            }
+        every { todoRepository.findByIdOrNull(any()) } returns null
+
+        shouldThrow<IdNotFoundException> {
+            todoService.getTodo(todoId)
         }
     }
+
 
     Given("모든 TODO 리스트를 전체 조회 해서"){
         When("TODO 리스트를 가져오면"){
