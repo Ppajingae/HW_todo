@@ -1,4 +1,4 @@
-package com.example.mytodo.domain.common
+package com.example.mytodo.common
 
 import org.springframework.web.bind.annotation.RequestMapping
 
